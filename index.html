@@ -1,13 +1,6 @@
 bash
 
-python3 - << 'PYEOF'
-with open('/mnt/user-data/outputs/quiz_data_22.js', 'r') as f:
-    quiz_data = f.read()
-
-# Remove the null entry
-quiz_data = quiz_data.replace("  HighPriestess2:null,\n", "")
-
-full_file = '''<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8"/>
