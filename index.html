@@ -65,6 +65,9 @@ body{background:#0d0b1a;color:#e8e0d0;font-family:'Jost',sans-serif;min-height:1
 .sun-inner{background:#0d0b1a;border:1px solid #f5c84233;border-radius:8px;padding:13px 16px;margin-top:12px}
 .sun-inner-label{color:#8a82a0;font-size:11px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:5px}
 .sun-energy{color:#f5c842;font-family:'Cormorant Garamond',serif;font-size:16px}
+.locked-box{background:#0d0b1a;border:1px dashed #f5c84255;border-radius:8px;padding:18px 16px;margin-top:8px;text-align:center}
+.locked-icon{font-size:22px;margin-bottom:8px}
+.locked-text{color:#8a82a0;font-size:13px;line-height:1.7}
 .cta-card{background:#14112b;border:1px solid #c47a8555;border-radius:12px;padding:26px 22px;text-align:center;margin-bottom:14px}
 .cta-title{font-family:'Cormorant Garamond',serif;font-size:clamp(18px,4vw,26px);font-weight:600;color:#f0d080;margin-bottom:10px}
 .cta-body{color:#8a82a0;font-size:15px;line-height:1.7;margin-bottom:16px}
@@ -76,22 +79,14 @@ body{background:#0d0b1a;color:#e8e0d0;font-family:'Jost',sans-serif;min-height:1
 .session-row{display:flex;align-items:flex-start;gap:10px;padding:6px 0;border-bottom:1px solid #1e1a38;font-size:13px;color:#c8c0d8;line-height:1.5}
 .session-row:last-child{border-bottom:none}
 .session-dot{color:#c47a85;font-size:9px;margin-top:4px;flex-shrink:0}
-.price-box{background:#0f0c20;border:1px solid #2e2857;border-radius:10px;padding:6px;margin-bottom:16px;text-align:left}
-.price-box-title{color:#c9a84c;font-size:11px;letter-spacing:.15em;text-transform:uppercase;padding:10px 12px 6px}
-.price-row{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:12px;border-radius:8px}
-.price-row-discount{background:#1c1530;border:1px solid #c9a84c55}
-.price-row-left{flex:1}
-.price-label{font-size:14px;color:#e8e0d0;line-height:1.5;margin-bottom:3px}
-.save-tag{display:inline-block;background:#2e1a20;color:#c47a85;font-size:11px;padding:2px 8px;border-radius:10px;margin-left:6px;letter-spacing:.03em;vertical-align:middle}
-.price-desc{font-size:12px;color:#8a82a0;line-height:1.6}
-.price-amount{font-family:'Cormorant Garamond',serif;font-size:24px;color:#8a82a0;white-space:nowrap}
-.price-amount-discount{color:#f0d080;font-weight:600;font-size:28px}
+.deadline-banner{background:#2e1a20;border:1px solid #c47a8555;border-radius:8px;padding:10px 14px;margin-bottom:16px;color:#e8b0b8;font-size:13px;text-align:center;letter-spacing:.02em}
 .feature-pills{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:16px}
 .feature-pill{background:#1a1530;border:1px solid #2e2857;color:#8a82a0;font-size:12px;padding:5px 12px;border-radius:20px}
 .cta-btn{background:linear-gradient(135deg,#c47a85,#a04050);border:none;color:#fff;font-family:'Jost',sans-serif;font-size:15px;font-weight:500;letter-spacing:.06em;padding:16px 36px;border-radius:6px;cursor:pointer;transition:opacity .2s,transform .15s;width:100%;margin-bottom:10px;display:block;text-decoration:none;text-align:center}
 .cta-btn:hover{opacity:.88;transform:scale(1.01)}
 .cta-btn-gold{background:linear-gradient(135deg,#c9a84c,#a07830);color:#0d0b1a}
 .cta-btn-blue{background:linear-gradient(135deg,#4a80c0,#2a5090);color:#fff}
+.cta-btn-ghost{background:transparent;border:1px solid #4a4468;color:#c8c0d8}
 .spots-badge{display:inline-block;background:#2e1a20;border:1px solid #c47a8566;color:#c47a85;font-size:12px;padding:4px 12px;border-radius:20px;margin-bottom:14px;letter-spacing:.05em}
 .cta-note{color:#8a82a0;font-size:13px;line-height:1.7;margin-top:10px}
 .retake-row{text-align:center;margin-top:20px}
@@ -108,15 +103,272 @@ body{background:#0d0b1a;color:#e8e0d0;font-family:'Jost',sans-serif;min-height:1
 const EJS_KEY  = 'UzY23e44cIij2M22R';
 const EJS_SVC  = 'service_qcah0cd';
 const EJS_TPL  = 'template_5np0yop';
-const PAYPAL   = 'https://paypal.me/1021rota/143';
-const TIKTOK   = 'https://www.tiktok.com/@1021rota';
 const MY_EMAIL = '1021rota@gmail.com';
+const CLARITY_CALL_LINK = 'mailto:1021rota@gmail.com?subject=Book%20My%20Free%20Clarity%20Call&body=Hi%20Rose%2C%20I%20just%20took%20the%20archetype%20quiz%20and%20I%27d%20love%20to%20book%20my%20free%20Clarity%20Call.%20My%20archetype%20result%20was%3A%20';
 emailjs.init(EJS_KEY);
 
 const starsEl=document.getElementById('stars');
 for(let i=0;i<80;i++){const s=document.createElement('div');s.className='star';const sz=Math.random()*2+0.5;s.style.cssText=`top:${Math.random()*100}%;left:${Math.random()*100}%;width:${sz}px;height:${sz}px;opacity:${Math.random()*.5+.2};animation-duration:${2+Math.random()*3}s;animation-delay:${Math.random()*2}s`;starsEl.appendChild(s);}
 
-''' + quiz_data + '''
+const QUESTIONS=[
+  {id:1,text:"When you face an important decision, what happens inside you?",options:[
+    {text:"My mind spins in circles — I can't land anywhere",arcanas:["Moon","Hermit"]},
+    {text:"I freeze and wait for a sign or the 'right moment'",arcanas:["Hanged","Moon"]},
+    {text:"I research endlessly but never feel ready enough",arcanas:["Hermit","Hierophant"]},
+    {text:"I second-guess every option until the window closes",arcanas:["Justice","Lovers"]},
+    {text:"I act fast but often regret it or blow things up",arcanas:["Tower","Chariot"]},
+    {text:"I defer to what others expect of me",arcanas:["Hierophant","Lovers"]},
+    {text:"I feel the pull of a clear calling but talk myself out of it",arcanas:["Judgement","Star"]},
+    {text:"I get excited about every option then can't choose any",arcanas:["Fool","Wheel"]},
+  ]},
+  {id:2,text:"What does your inner critic sound like most often?",options:[
+    {text:"'You don't know enough yet to move forward'",arcanas:["Hermit","Hierophant"]},
+    {text:"'Something bad will happen if you get this wrong'",arcanas:["Moon","Tower"]},
+    {text:"'Who do you think you are to want more?'",arcanas:["HighPriestess","Wheel"]},
+    {text:"'You have to be fair to everyone — even people who hurt you'",arcanas:["Justice","Judgement"]},
+    {text:"'You always do this — nothing ever changes for you'",arcanas:["Wheel","Devil"]},
+    {text:"'Stop being so much — you're overwhelming people'",arcanas:["Strength","Sun"]},
+    {text:"'You had your chance and you blew it'",arcanas:["Tower","Death"]},
+    {text:"'Just keep everyone happy and things will be fine'",arcanas:["Temperance","Empress"]},
+  ]},
+  {id:3,text:"When you imagine the life you really want, what gets in the way?",options:[
+    {text:"I don't fully believe I deserve it",arcanas:["Moon","Devil"]},
+    {text:"I don't know what I want — it keeps shifting",arcanas:["Moon","Lovers"]},
+    {text:"Fear of what I'd have to let go of or lose",arcanas:["Devil","Death"]},
+    {text:"Fear of judgment or breaking unspoken rules",arcanas:["Hierophant","Justice"]},
+    {text:"I worry I'd destroy something good in the process",arcanas:["Tower","Chariot"]},
+    {text:"I'm waiting until everything aligns perfectly",arcanas:["Hermit","Wheel"]},
+    {text:"I've been through too much to hope that big again",arcanas:["Star","Death"]},
+    {text:"I feel like I've already missed my window",arcanas:["Judgement","World"]},
+  ]},
+  {id:4,text:"How do you relate to your own emotions?",options:[
+    {text:"I feel everything deeply but don't know what to do with it",arcanas:["Moon","HighPriestess"]},
+    {text:"I push them down and keep moving",arcanas:["Chariot","Tower"]},
+    {text:"I analyze them instead of feeling them",arcanas:["Hermit","Justice"]},
+    {text:"I feel guilty for having needs or wants at all",arcanas:["Hierophant","Devil"]},
+    {text:"My emotions swing unpredictably and scare me",arcanas:["Moon","Wheel"]},
+    {text:"I wait to see how others feel before I decide how I feel",arcanas:["Lovers","HighPriestess"]},
+    {text:"I express joy easily but hide struggle and pain",arcanas:["Sun","Strength"]},
+    {text:"I give care freely but struggle to feel my own feelings",arcanas:["Empress","Temperance"]},
+  ]},
+  {id:5,text:"What pattern shows up most in your relationships?",options:[
+    {text:"I give too much and end up invisible or depleted",arcanas:["Empress","Devil"]},
+    {text:"I pull away when things get too close or real",arcanas:["Hermit","Hanged"]},
+    {text:"I attract chaos or people who need rescuing",arcanas:["Tower","Moon"]},
+    {text:"I people-please to keep the peace",arcanas:["Justice","Temperance"]},
+    {text:"I hold everything in until I explode or disappear",arcanas:["Tower","Strength"]},
+    {text:"I struggle to trust my read on people",arcanas:["Moon","HighPriestess"]},
+    {text:"I shape-shift to be who they need me to be",arcanas:["Lovers","Magician"]},
+    {text:"I stay long after I know something has ended",arcanas:["Death","Devil"]},
+  ]},
+  {id:6,text:"What does 'taking action' feel like to you right now?",options:[
+    {text:"Terrifying — I might fail publicly",arcanas:["Moon","Tower"]},
+    {text:"Pointless — things never really change for me",arcanas:["Wheel","Devil"]},
+    {text:"Selfish — I should be putting others first",arcanas:["Hierophant","Justice"]},
+    {text:"Impossible — I can't find the right direction",arcanas:["Lovers","Moon"]},
+    {text:"Dangerous — something will break if I push too hard",arcanas:["Tower","Chariot"]},
+    {text:"Premature — I'm still figuring it out",arcanas:["Hermit","Hanged"]},
+    {text:"Exhausting — I've been pushing so long I have nothing left",arcanas:["Chariot","Empress"]},
+    {text:"Close — I can feel it but something keeps stopping me at the last moment",arcanas:["World","Judgement"]},
+  ]},
+  {id:7,text:"When you've succeeded in the past, what usually happened next?",options:[
+    {text:"I immediately worried it would be taken away",arcanas:["Moon","Wheel"]},
+    {text:"I undermined it or walked away before it could disappoint me",arcanas:["Tower","Devil"]},
+    {text:"I moved the goalposts — it was never enough",arcanas:["Chariot","Magician"]},
+    {text:"I minimized it or gave all the credit to someone else",arcanas:["HighPriestess","Justice"]},
+    {text:"I felt guilty — like I didn't deserve it",arcanas:["Hierophant","Devil"]},
+    {text:"I wasn't sure it was really my success — maybe luck",arcanas:["Wheel","Hanged"]},
+    {text:"I celebrated briefly then immediately started the next thing",arcanas:["Fool","World"]},
+    {text:"I performed happiness about it even when I felt empty inside",arcanas:["Sun","Magician"]},
+  ]},
+  {id:8,text:"What does your relationship with your own body and energy feel like?",options:[
+    {text:"I'm often exhausted but push through anyway",arcanas:["Chariot","Emperor"]},
+    {text:"I feel disconnected from my body — it's just a vehicle",arcanas:["Hermit","Hanged"]},
+    {text:"My anxiety lives in my body — tension, dread, unsettled",arcanas:["Moon","Tower"]},
+    {text:"I neglect myself while taking care of everyone else",arcanas:["Empress","Hierophant"]},
+    {text:"I suppress my physical needs because they feel inconvenient",arcanas:["Strength","Justice"]},
+    {text:"My energy is unpredictable — high highs and crashed lows",arcanas:["Fool","Wheel"]},
+    {text:"I feel most alive when creating or expressing something",arcanas:["Empress","Star"]},
+    {text:"I've been running on empty so long I've forgotten what full feels like",arcanas:["Death","Devil"]},
+  ]},
+  {id:9,text:"What would change first if you stepped fully into your power?",options:[
+    {text:"I'd finally speak what I know without waiting for permission",arcanas:["HighPriestess","Hierophant"]},
+    {text:"I'd stop shrinking to make others comfortable",arcanas:["Strength","Sun"]},
+    {text:"I'd leave what's no longer meant for me",arcanas:["Death","Devil"]},
+    {text:"I'd start the thing I've been circling for years",arcanas:["Hermit","Hanged"]},
+    {text:"I'd ask for what I actually want",arcanas:["Moon","Lovers"]},
+    {text:"I'd trust myself more and need less reassurance",arcanas:["Moon","Justice"]},
+    {text:"I'd answer the call I keep ignoring",arcanas:["Judgement","Star"]},
+    {text:"I'd stop performing and just be",arcanas:["Sun","Magician"]},
+  ]},
+  {id:10,text:"Which of these feels most like a hidden truth about you?",options:[
+    {text:"I know things I can't explain and I've learned to keep that quiet",arcanas:["HighPriestess","Moon"]},
+    {text:"I've been stronger for everyone else and I'm tired",arcanas:["Strength","Empress"]},
+    {text:"Something important ended and I haven't fully let it go",arcanas:["Death","Devil"]},
+    {text:"I'm capable of more than I let anyone see — including myself",arcanas:["Magician","Sun"]},
+    {text:"I'm waiting for something to change from the outside before I change from within",arcanas:["Wheel","Hanged"]},
+    {text:"I feel called to something bigger but I don't feel worthy of it yet",arcanas:["Judgement","Star"]},
+    {text:"I'm almost there — so close I can feel it — but I keep stopping short",arcanas:["World","Chariot"]},
+    {text:"I've built a life that looks right from the outside but doesn't feel like mine",arcanas:["Emperor","Hierophant"]},
+  ]},
+];
+
+const ARCANA={
+  Moon:{name:"The Moon",symbol:"🌑",headline:"The Overthinker in the Dark",color:"#b8c4d8",referral:false,
+    imbalance:"You live in the land between what is real and what is feared. Your imagination is vivid and your intuition powerful — but in imbalance, you can't tell the difference between a genuine signal and anxiety dressed up as knowing. You second-guess yourself constantly, avoid clarity because clarity feels dangerous, and stay suspended in uncertainty because deciding means risking.",
+    limitingBeliefs:["\"If I stay uncertain, I can't be wrong.\"","\"My feelings aren't trustworthy — but neither is logic.\"","\"Something bad will happen if I get too visible.\"","\"I need to understand everything before I move.\""],
+    shadow:"Fear disguised as intuition. Anxiety mistaken for wisdom.",
+    movingForward:"Your path is toward The Sun — not by eliminating your sensitivity, but by letting light into the fog. You don't need certainty; you need one honest step. NLP tools like timeline work and submodality shifts can help you separate genuine inner knowing from fear-based spinning.",
+    sunEnergy:"Clarity. Visibility. Joyful confidence. Acting without needing to know the outcome first.",
+    balancedState:"The illuminated mystic who navigates the dark with her own inner light."},
+  Hermit:{name:"The Hermit",symbol:"🪔",headline:"The Seeker Who Never Arrives",color:"#8a82a0",referral:false,
+    imbalance:"You have wisdom, depth, and an inner knowing that others admire. But in imbalance, you use your quest for understanding as a reason to never land. More research, more preparation, more time alone — this is the story you tell.",
+    limitingBeliefs:["\"I'm not ready yet.\"","\"I need to understand this fully before I share it.\"","\"Other people won't get it unless I explain it perfectly.\"","\"Solitude is where I do my best work.\""],
+    shadow:"Isolation disguised as discernment. Preparation as permanent postponement.",
+    movingForward:"Your path is toward The Sun — bringing your lantern out of the cave. You already know enough. The missing piece isn't more information; it's willingness to be seen before you're perfect.",
+    sunEnergy:"Generous sharing. Visible leadership. Trusting your wisdom is enough, right now.",
+    balancedState:"The wise guide who illuminates the path for others from earned solitude."},
+  Tower:{name:"The Tower",symbol:"⚡",headline:"The Disruptor Who Fears Her Own Power",color:"#e07060",referral:false,
+    imbalance:"You know the structures around you aren't built on truth. You've either watched things collapse or live in quiet terror that they will. In imbalance, you unconsciously blow things up before they can disappoint you, or grip so tight to what's left that no air gets in.",
+    limitingBeliefs:["\"If I grow too much, I'll destroy what I love.\"","\"Chaos always finds me — why try?\"","\"The last time I risked, everything fell apart.\"","\"I have to control everything or it all collapses.\""],
+    shadow:"Self-sabotage as self-protection. Burning it down before someone else can.",
+    movingForward:"The lightning struck to clear ground for something true to be built. Collapse was not punishment — it was prerequisite. NLP anchoring and parts work can help you distinguish destruction from necessary release.",
+    sunEnergy:"Intentional rebuilding. Courage to create. Freedom from bracing for impact.",
+    balancedState:"The conscious rebuilder who lets what's false fall and builds on bedrock."},
+  Devil:{name:"The Devil",symbol:"⛓️",headline:"The One Who Believes She Can't Leave",color:"#9060b0",referral:false,
+    imbalance:"The chains in this card are loose — the figures could remove them. You're not actually trapped, but you believe you are. The bondage is a story. It might be a relationship, job, identity, habit, or belief system that says this is just how it is for someone like you.",
+    limitingBeliefs:["\"I don't have what it takes to have more than this.\"","\"I'd lose everything if I actually changed.\"","\"This is just who I am.\"","\"I've tried before and it didn't work.\""],
+    shadow:"Learned helplessness. Using past evidence to make the future fixed.",
+    movingForward:"The door was never locked from the outside. Timeline regression and belief reimprinting are particularly powerful here — finding the moment the story started and writing a new one.",
+    sunEnergy:"Liberation. Full self-ownership. Taking up space without apology.",
+    balancedState:"The one who faced her shadow, integrated it, and uses her darkness as fuel."},
+  Hierophant:{name:"The Hierophant",symbol:"🏛️",headline:"The Rule-Follower Waiting for Permission",color:"#c9a84c",referral:false,
+    imbalance:"You were taught what 'correct' looks like. In balance, tradition grounds you. In imbalance, it imprisons you. You shape yourself to external standards and call it integrity. You wait for authority to sanction your next move and call it discernment.",
+    limitingBeliefs:["\"I need someone with authority to validate this.\"","\"Good people put others first.\"","\"Breaking from tradition means I'm selfish.\"","\"I should have figured this out by now.\""],
+    shadow:"Outsourced authority. Confusing compliance with virtue.",
+    movingForward:"Reclaim your own inner authority. The system you were handed was built by people with their own agendas. Your values, examined consciously and chosen freely, are more trustworthy than inherited rules.",
+    sunEnergy:"Self-authority. Chosen values. Leading from your own knowing.",
+    balancedState:"The wise teacher who bridges tradition and personal truth from a place of inner sovereignty."},
+  Justice:{name:"Justice",symbol:"⚖️",headline:"The Fair Witness Who Can't Rule in Her Own Favor",color:"#70a0c0",referral:false,
+    imbalance:"You have a profound sense of right and wrong. You see all sides. But in imbalance, this becomes paralysis — you can't act until everything is perfectly fair. You apply more mercy to others than to yourself. You stay in situations that harm you because 'it's complicated.'",
+    limitingBeliefs:["\"I have to consider everyone's perspective before I decide.\"","\"My needs don't outweigh others' feelings.\"","\"If I can't be perfectly objective, I shouldn't act.\"","\"It's not fair to put myself first.\""],
+    shadow:"Fairness used as self-erasure. Chronic over-responsibility for others' experience.",
+    movingForward:"Apply the same compassion to yourself that you extend so generously to everyone else. You are allowed to rule in your own favor. Perceptual position work and self-compassion reframes can help.",
+    sunEnergy:"Self-advocacy. Clear boundaries. Acting decisively from your own truth.",
+    balancedState:"The clear-eyed truth-teller who acts with integrity AND self-respect."},
+  Lovers:{name:"The Lovers",symbol:"💞",headline:"The One Who Can't Choose Herself",color:"#c47a85",referral:false,
+    imbalance:"This card is about alignment — values, desires, authentic choice. In imbalance, you chase approval so others can tell you who you are. You shape-shift to be lovable. You avoid committing to yourself because commitment means disappointing someone.",
+    limitingBeliefs:["\"If I fully choose myself, I'll end up alone.\"","\"I don't know what I want separate from others.\"","\"My worth depends on being chosen.\"","\"Love means sacrifice.\""],
+    shadow:"Identity outsourcing. Mistaking self-abandonment for love.",
+    movingForward:"Clarity about who you are makes you more magnetic, not less lovable. When you can stand in a full choice — this is who I am, this is what I want — the right connections find you.",
+    sunEnergy:"Wholeness. Authentic desire. Choosing yourself as the foundation of all love.",
+    balancedState:"The one who chooses from wholeness — relationships reflecting her self-knowledge."},
+  HighPriestess:{name:"The High Priestess",symbol:"🌙",headline:"The Keeper of Knowing Who Stays Silent",color:"#8080c0",referral:false,
+    imbalance:"Your inner world is rich and profound. You sense things others miss. But in imbalance, you keep it all inside — guarding your gifts like a secret, waiting until you're certain, until it's safe. Wisdom hoarded is wisdom that cannot heal.",
+    limitingBeliefs:["\"I need to be certain before I speak.\"","\"If I share too much, I'll be misunderstood.\"","\"My inner knowing isn't 'enough' — I need proof.\"","\"It's safer to observe than to participate.\""],
+    shadow:"Wisdom as withholding. Depth as distance.",
+    movingForward:"Bring your inner knowing into the world. You were not given your gifts to hold them alone. Small, consistent acts of sharing build the trust in yourself that proves sharing is safe.",
+    sunEnergy:"Expressed wisdom. Confident voice. Trusting yourself to speak and be received.",
+    balancedState:"The wise guide who speaks truth with quiet authority from a place of deep certainty."},
+  Hanged:{name:"The Hanged Man",symbol:"🔄",headline:"The Suspended One Who Calls It Surrender",color:"#60b090",referral:false,
+    imbalance:"There is genuine wisdom in the pause. But in imbalance, the pause becomes permanent. You are waiting — for clarity, for the right moment, for circumstances to change. You've spiritualized your stuckness, calling it 'trusting the process.' Time passes and the life you want stays hypothetical.",
+    limitingBeliefs:["\"I'll know when the time is right.\"","\"I shouldn't force things.\"","\"If I wait long enough, clarity will come.\"","\"Moving forward feels like giving something up.\""],
+    shadow:"Spiritual bypassing. Using surrender as avoidance.",
+    movingForward:"Action creates clarity that waiting never will. The Hanged Man's illumination comes through the suspension, not from it. At some point, you have to cut yourself down.",
+    sunEnergy:"Decisive movement. Trust through action. Releasing what keeps you upside-down.",
+    balancedState:"The one who uses sacred pause intentionally then acts from the new perspective gained."},
+  Chariot:{name:"The Chariot",symbol:"🏆",headline:"The Achiever Who Can't Stop to Receive",color:"#c0a030",referral:false,
+    imbalance:"You are driven, disciplined, determined. But in imbalance, momentum never stops because stopping feels like dying. You push harder when afraid. You achieve your way past your feelings. You're winning at races you didn't choose to enter.",
+    limitingBeliefs:["\"If I stop driving, everything falls apart.\"","\"I can outwork any obstacle.\"","\"Emotions are a distraction from goals.\"","\"I don't deserve rest until I've earned it.\""],
+    shadow:"Achievement as avoidance. Willpower substituted for wisdom.",
+    movingForward:"Learn to receive as well as achieve. The Sun doesn't chase — it attracts. Integrating your emotional body and valuing being over doing can transform your drive from fear-based urgency into purposeful flow.",
+    sunEnergy:"Purposeful flow. Ease in achievement. Leading from joy, not urgency.",
+    balancedState:"The purposeful achiever who wins the right races with grace and presence."},
+  Wheel:{name:"Wheel of Fortune",symbol:"🎡",headline:"The One Who Waits for the Wheel to Turn",color:"#b07040",referral:false,
+    imbalance:"You've learned life is cyclical and unpredictable — and that's true. But in imbalance, this becomes a reason to abdicate agency. You wait for luck to shift. You've outsourced your power to fate and called it wisdom.",
+    limitingBeliefs:["\"I can't control what happens to me.\"","\"When it's my time, it will happen.\"","\"I've tried before and the timing was wrong.\"","\"Things always work out for others, not me.\""],
+    shadow:"Fatalism dressed as faith. Passive waiting called trust.",
+    movingForward:"You are a force within the cycle, not just subject to it. Your choices influence what comes. Locus-of-control reframes can help you see where your decisions — not fate — created outcomes.",
+    sunEnergy:"Co-creation. Intentional momentum. Owning your power within life's cycles.",
+    balancedState:"The one who surfs cycles with wisdom — knowing when to push and when to wait, always as a participant."},
+  Judgement:{name:"Judgement",symbol:"🎺",headline:"The One Awaiting the Call She's Already Heard",color:"#a0c0a0",referral:false,
+    imbalance:"You've had the awakening. You've felt the call. Something in you knows what you're here to do — and yet you haven't answered. You're waiting for more signs, a louder trumpet, absolute certainty. The horn has already sounded. You just haven't risen yet.",
+    limitingBeliefs:["\"I need to be sure this is really my calling.\"","\"I have too much to atone for before stepping forward.\"","\"What if I answer and I'm wrong?\"","\"I'm not ready to be that visible yet.\""],
+    shadow:"Calling deferred. Readiness used as a gatekeeper for destiny.",
+    movingForward:"The call doesn't get louder — only more insistent. Rising doesn't require perfection or absolution; it requires showing up as you are right now. Identity-level belief work and 'as if' reframing are your tools.",
+    sunEnergy:"Answered calling. Purposeful visibility. Rising fully into who you already are.",
+    balancedState:"The one who answers the call without waiting for absolution — the rising itself becomes the proof."},
+  Fool:{name:"The Fool",symbol:"🌀",headline:"The Eternal Beginner Who Won't Land",color:"#88c0d0",referral:true,
+    imbalance:"You chase novelty to avoid depth. You mistake recklessness for freedom and commitment for a cage. Unfinished projects everywhere. You confuse aliveness with avoidance.",
+    limitingBeliefs:["\"If I commit, I'll miss something better.\"","\"Responsibility kills spontaneity.\"","\"I'm not ready to be that serious yet.\"","\"Starting over means I'm free, not failing.\""],
+    shadow:"Completion avoided. Freedom used to escape accountability.",
+    movingForward:"True freedom comes AFTER mastery, not before it. Completion is the portal. Future-pacing the version of yourself who finished something and felt the aliveness of that — that's the work.",
+    sunEnergy:"Joyful risk-taking rooted in self-trust. Beginning new chapters intentionally.",
+    balancedState:"The courageous pioneer who takes bold leaps WITH a plan and sees them through."},
+  Magician:{name:"The Magician",symbol:"✨",headline:"The One Performing Instead of Being",color:"#d4a0c0",referral:true,
+    imbalance:"Either performing competence you don't feel, or hiding gifts you're afraid to claim. The con artist or the imposter — both are the Magician out of balance. People sense the gap between who you present and who you are.",
+    limitingBeliefs:["\"If people knew the real me, they'd see I'm a fraud.\"","\"I have to appear confident even when I'm not.\"","\"My potential is either everything or nothing.\"","\"I can make things happen for others but not for myself.\""],
+    shadow:"Performance over presence. Potential used as currency instead of embodied as identity.",
+    movingForward:"Align inner knowing with outer action. Stop performing and start embodying. Identity-level work — 'I am someone who uses what I have' — and values alignment between gifts and daily actions.",
+    sunEnergy:"Authentic power. Turning intention into reality. Leading with presence, not performance.",
+    balancedState:"The master manifestor who works with all available tools consciously and authentically."},
+  Empress:{name:"The Empress",symbol:"🌸",headline:"The Giver Who Has Forgotten to Receive",color:"#c49060",referral:true,
+    imbalance:"Overgiving to the point of depletion. Smothering others with care while neglecting self. OR withholding nurture because vulnerability feels dangerous. Your worth has become entangled with what you provide.",
+    limitingBeliefs:["\"My worth is in what I provide for others.\"","\"If I stop giving, people will leave.\"","\"Receiving feels selfish or unsafe.\"","\"I can nurture everyone except myself.\""],
+    shadow:"Depletion disguised as generosity. Giving from empty and calling it love.",
+    movingForward:"Radical self-care as a non-negotiable. Learning to receive as a spiritual practice. Parts work between the giver and the one who needs to be given to.",
+    sunEnergy:"Generous from fullness. Creative flow. Embodied self-worth. Receiving gracefully.",
+    balancedState:"The abundant creative who pours from overflow, not depletion."},
+  Emperor:{name:"The Emperor",symbol:"👑",headline:"The Controller or the Abdicator",color:"#a06040",referral:true,
+    imbalance:"Either controlling and rigid — micromanaging everything — or completely avoiding structure because authority feels oppressive. Power used as defense rather than service. Either a tyrant or an abdicator.",
+    limitingBeliefs:["\"If I'm not in control, everything falls apart.\"","\"Structure is a cage, not a foundation.\"","\"Authority means domination.\"","\"I have to be strong or I'm weak — no middle.\""],
+    shadow:"Control as fear. Abdication as avoidance of responsibility.",
+    movingForward:"Healthy boundaries and systems built on values, not fear. Leadership that protects rather than controls. Reframing authority as stewardship.",
+    sunEnergy:"Grounded leadership. Protective structure. Power in service of others.",
+    balancedState:"The leader who builds empires with integrity — providing safety and structure for others to thrive."},
+  Strength:{name:"Strength",symbol:"🦁",headline:"The One Who Tamed Herself Into Smallness",color:"#e0a030",referral:true,
+    imbalance:"Suppresses her own power to make others comfortable. Either overcompliant — swallowing everything — or periodically erupts in ways that damage trust. Her gifts — passion, intensity, fierceness — are seen as problems.",
+    limitingBeliefs:["\"My intensity is too much for people.\"","\"Being strong means not showing weakness.\"","\"If I show my full power, I'll hurt someone.\"","\"I have to tame myself to be loved.\""],
+    shadow:"Suppression of power as an act of love. Smallness as safety.",
+    movingForward:"Reclaim intensity as a gift. Strength is not suppression — it's integration. Parts work with the fierce self and the tamed self. Strength in balance tames the lion with love, not force.",
+    sunEnergy:"Integrated power. Compassionate fierceness. Leading with love and backbone.",
+    balancedState:"The one whose gentle power transforms rather than controls — fierce and loving simultaneously."},
+  Star:{name:"The Star",symbol:"⭐",headline:"The One Who Lost Hope After the Storm",color:"#90b8e0",referral:true,
+    imbalance:"Lost hope after difficulty. Going through motions. Disconnected from vision after hardship. OR: naive idealism that avoids reality — wishful thinking replacing action. Either numbness or hope that crashes into disappointment.",
+    limitingBeliefs:["\"After everything I've been through, hope feels naive.\"","\"What's the point of wanting things that don't happen?\"","\"I used to believe in myself but I don't anymore.\"","\"Hoping just sets me up for more disappointment.\""],
+    shadow:"Hope abandoned as protection from further disappointment.",
+    movingForward:"Reconnect to a vision larger than the wound. Hope is not naive — it's navigational. Future pacing from a healed place, rebuilding the vision of what's possible.",
+    sunEnergy:"Renewed hope. Clear vision. Healing as a portal to purpose. Inspiring others by example.",
+    balancedState:"The light after the storm — she pours from an inexhaustible well and inspires by example."},
+  Sun:{name:"The Sun",symbol:"☀️",headline:"The One Hiding Behind Performed Happiness",color:"#f5c842",referral:true,
+    imbalance:"Performative joy. Hiding shadow behind relentless positivity. OR: has dimmed her own light to avoid outshining others or inviting envy. Either toxic positivity or hidden light — both out of balance.",
+    limitingBeliefs:["\"I have to be positive or I'm a burden.\"","\"If I shine too bright, I'll make others feel small.\"","\"My joy isn't real if I have dark days too.\"","\"Being fully seen is dangerous.\""],
+    shadow:"Performed radiance. Authentic light dimmed to manage others' comfort.",
+    movingForward:"Authentic radiance includes shadow. You don't have to perform joy — embody it. Full visibility as an act of service. Permission to be fully seen, integrating shadow with light.",
+    sunEnergy:"Authentic joy. Full visibility. Radiance that lifts others without dimming self.",
+    balancedState:"Gloriously, authentically radiant — her light is contagious because it's real."},
+  Death:{name:"Death",symbol:"🦋",headline:"The One Holding On to What Has Already Ended",color:"#708090",referral:true,
+    imbalance:"Resists endings. Clings to what has already died — relationships, identities, careers, beliefs. The known is safer than the unknown of what comes next. Life feels stagnant even when things are technically fine.",
+    limitingBeliefs:["\"If this ends, I don't know who I am.\"","\"Letting go means losing.\"","\"I can fix this if I just try harder.\"","\"The next thing might be worse.\""],
+    shadow:"Clinging to what's complete. Dragging the past as ballast against the future.",
+    movingForward:"Trust that completion is the door to transformation. What's dying is making room. Timeline work to release, future pacing the self after the transition.",
+    sunEnergy:"Graceful endings. Conscious transformation. Trusting the fallow period before new growth.",
+    balancedState:"The master transformer who releases with grace and steps into reinvention without looking back."},
+  Temperance:{name:"Temperance",symbol:"🌊",headline:"The Peacekeeper Who Lost Herself",color:"#70c0a0",referral:true,
+    imbalance:"Chronic people-pleasing in the name of harmony. Avoids extremes so thoroughly she never fully commits. No strong opinions, no bold moves, always moderating. A lifetime of moderation produces a moderate life.",
+    limitingBeliefs:["\"Strong feelings make people uncomfortable.\"","\"I need to balance everyone's needs before my own.\"","\"Keeping peace is more important than truth.\"","\"Being too much of anything is dangerous.\""],
+    shadow:"Harmony at the cost of self. Moderation as a way of never being seen.",
+    movingForward:"True temperance is alchemy — combining opposites into something new, not avoiding both. Find your edge. Values clarification: what do you actually stand for?",
+    sunEnergy:"Alchemy. Purposeful integration. Standing for something while holding space for complexity.",
+    balancedState:"The master alchemist who integrates opposites into genius — she has an edge AND holds space."},
+  World:{name:"The World",symbol:"🌍",headline:"The One Who Won't Cross the Finish Line",color:"#60d080",referral:true,
+    imbalance:"So close to completion but won't cross the finish line. Fear of what comes after success. Or: completed the cycle but refuses to begin the next — holding on to an identity or chapter that is complete.",
+    limitingBeliefs:["\"What if the next thing isn't as good as this?\"","\"Success means I have to keep performing at this level.\"","\"If this chapter ends, I don't know who I am next.\"","\"I've worked so hard to get here — leaving feels like loss.\""],
+    shadow:"Threshold fear. Standing at the door of completion and retreating.",
+    movingForward:"Completion is the beginning. Cross the threshold. Every World card is also a Fool's step into the next spiral. Celebrating completion, identity work for the next chapter.",
+    sunEnergy:"Joyful completion. Graceful transition. Mastery of cycles. Beginning again from wholeness.",
+    balancedState:"The master of evolution who completes each cycle with grace and begins the next with wisdom."},
+};
 
 function score(answers){
   const t={};
@@ -145,7 +397,8 @@ async function sendResult(name,email,archetype,path,sunEnergy,beliefs,balanced,s
       beliefs:beliefs,
       balanced_state:balanced,
       answer_summary:summary,
-      session_dates:'July 6 at 7:00pm / July 11 at 12:00pm / July 18 at 12:00pm / July 25 at 12:00pm (all EST)',
+      session_dates:'Saturdays July 18, July 25, August 1 & August 8 at 5:00pm (NY, USA)',
+      registration_deadline:'July 17 at 11:59pm (NY, USA)',
       coach_email:MY_EMAIL,
       reply_to:MY_EMAIL,
     });
@@ -164,13 +417,13 @@ function render(){
   if(S.screen==='intro'){
     app.innerHTML=`<div class="screen">
       <div class="intro-icon">&#10022;</div>
-      <p class="eyebrow">Sacred Archetype Reading</p>
-      <h1 class="intro-title">Which Major Arcana<br>Is Running Your Life?</h1>
-      <p class="intro-sub">Every pattern has a name. Every block has an archetype beneath it.</p>
-      <p class="intro-body">This 10-question reading identifies which of the 22 Major Arcana is most active in your life right now — where it's keeping you stuck, the belief driving it, and the path into your most aligned, abundant self.</p>
+      <p class="eyebrow">A Sacred Archetype Reading</p>
+      <h1 class="intro-title">Before the Ball,<br>She Was Just Ella.</h1>
+      <p class="intro-sub">Somewhere between the fireplace and the fairytale, she forgot her own name.</p>
+      <p class="intro-body">Every overthinker has an "Ella" chapter &#8212; the version of you that got renamed by circumstance and told to be smaller, useful, quiet. This 10-question reading reveals which Major Arcana archetype is running that old story in you right now &#8212; where it keeps you by the fire &#8212; and the first step back toward the version of you who already knows she's meant for the ball.</p>
       <div class="pills">
         <span class="pill"><span class="pill-dot">&#10022;</span> 7 minutes</span>
-        <span class="pill"><span class="pill-dot">&#10022;</span> All 22 archetypes</span>
+        <span class="pill"><span class="pill-dot">&#10022;</span> 22 archetypes</span>
         <span class="pill"><span class="pill-dot">&#10022;</span> Deeply personal</span>
       </div>
       <div style="text-align:center">
@@ -196,7 +449,7 @@ function render(){
     app.innerHTML=`<div class="screen"><div class="card">
       <p class="eyebrow" style="text-align:left;margin-bottom:8px">One Last Step</p>
       <p style="font-family:'Cormorant Garamond',serif;font-size:clamp(20px,4vw,27px);color:#f0d080;margin-bottom:8px;line-height:1.3">Where should we send your reading?</p>
-      <p style="color:#8a82a0;font-size:14px;line-height:1.6;margin-bottom:22px">Enter your name and email to reveal your archetype. Rose will also email you your full reading and path forward.</p>
+      <p style="color:#8a82a0;font-size:14px;line-height:1.6;margin-bottom:22px">Enter your name and email to reveal your archetype. Rose will also email you a copy of your reading.</p>
       <label class="form-label">First name</label>
       <input class="form-input" id="inp-name" type="text" placeholder="e.g. Sarah" value="${S.name}" oninput="S.name=this.value"/>
       <label class="form-label">Email address</label>
@@ -216,48 +469,31 @@ function render(){
     const ctaSection = isReferral ? `
       <div class="referral-card">
         <p class="eyebrow">A Note From Rose</p>
-        <p class="referral-title">Your archetype points to specialized work</p>
-        <p class="referral-body">The <strong style="color:#90b8e0">${r.name}</strong> energy you're working through is real and important — and it's best served by a specialist whose entire practice is built around exactly this pattern.<br><br>My Moon to Sun program focuses on overthinkers and identity-level blocks. For <strong style="color:#90b8e0">${r.name}</strong> energy, I'd love to connect you with a colleague whose work is designed specifically for your journey.</p>
-        <a href="mailto:${MY_EMAIL}?subject=Referral Request - ${r.name} Archetype&body=Hi Rose, I completed the Major Arcana quiz and received ${r.name}. I'd love a referral recommendation." target="_blank" class="cta-btn cta-btn-blue">&#10022; Request a Referral from Rose</a>
-        <p class="cta-note">Email Rose at <a href="mailto:${MY_EMAIL}" style="color:#90b8e0">${MY_EMAIL}</a> &#8212; she'll personally match you with the right practitioner.</p>
+        <p class="referral-title">Your pattern runs deeper than this reading</p>
+        <p class="referral-body">The <strong style="color:#90b8e0">${r.name}</strong> energy you're carrying is real, and it's part of a bigger picture &#8212; the full 22-archetype map, not just the 12 patterns my Moon to Sun program was built around.<br><br>The complete <strong style="color:#90b8e0">Archetype Guide</strong> (all 22 patterns, shadow work, and NLP correction tools) is in the works. Email me and I'll make sure you're first to get it &#8212; and if overthinking is part of your story too, we can talk about a Clarity Call as well.</p>
+        <a href="mailto:${MY_EMAIL}?subject=Archetype Guide Waitlist - ${r.name}&body=Hi Rose, I completed the Major Arcana quiz and received ${r.name}. Please add me to the waitlist for the Archetype Guide." target="_blank" class="cta-btn cta-btn-blue">&#10022; Join the Archetype Guide Waitlist</a>
+        <p class="cta-note">Or email Rose directly at <a href="mailto:${MY_EMAIL}" style="color:#90b8e0">${MY_EMAIL}</a></p>
       </div>` : `
       <div class="cta-card">
         <div class="spots-badge">&#9679; Only 10 spots available</div>
         <p class="cta-title">Ready to move from ${r.name} into your Sun?</p>
-        <p class="cta-body">The <strong style="color:#e8e0d0">Moon &#8594; Sun 4-Week Pilot Program</strong> uses NLP tools to rewire the exact beliefs your archetype revealed today.</p>
+        <p class="cta-body">The <strong style="color:#e8e0d0">Moon &#8594; Sun 4-Week Pilot Program</strong> uses NLP tools to rewire the exact belief your archetype revealed today &#8212; and on your free Clarity Call, Rose will walk you through your full path forward, including the parts of this reading we're saving for that conversation.</p>
         <div class="session-box">
-          <p class="session-box-title">&#10022; July Pilot Cohort &#8212; Live Sessions (EST)</p>
-          <div class="session-row"><span class="session-dot">&#9679;</span>Monday July 6 &middot; 7:00 PM &#8212; Archetype Deep Dive + Root Belief Work</div>
-          <div class="session-row"><span class="session-dot">&#9679;</span>Saturday July 11 &middot; 12:00 PM &#8212; NLP Reimprinting + Parts Integration</div>
-          <div class="session-row"><span class="session-dot">&#9679;</span>Saturday July 18 &middot; 12:00 PM &#8212; Identity Shift + Action Anchoring</div>
-          <div class="session-row"><span class="session-dot">&#9679;</span>Saturday July 25 &middot; 12:00 PM &#8212; Sun Integration + Moving Forward</div>
+          <p class="session-box-title">&#10022; Founding Cohort &#8212; Live Sessions (NY, USA)</p>
+          <div class="session-row"><span class="session-dot">&#9679;</span>Saturday, July 18 &middot; 5:00 PM</div>
+          <div class="session-row"><span class="session-dot">&#9679;</span>Saturday, July 25 &middot; 5:00 PM</div>
+          <div class="session-row"><span class="session-dot">&#9679;</span>Saturday, August 1 &middot; 5:00 PM</div>
+          <div class="session-row"><span class="session-dot">&#9679;</span>Saturday, August 8 &middot; 5:00 PM</div>
         </div>
+        <div class="deadline-banner">&#9203; Registration closes July 17 at 11:59pm (NY, USA)</div>
         <div class="feature-pills">
           <span class="feature-pill">Belief reimprinting</span>
           <span class="feature-pill">Parts integration</span>
           <span class="feature-pill">Identity-level NLP</span>
           <span class="feature-pill">Live group coaching</span>
         </div>
-        <div class="price-box">
-          <p class="price-box-title">&#10022; Two Ways to Join</p>
-          <div class="price-row">
-            <div class="price-row-left">
-              <p class="price-label">Standard Pilot Price</p>
-              <p class="price-desc">Pay now to reserve your spot</p>
-            </div>
-            <p class="price-amount">$143</p>
-          </div>
-          <div class="price-row price-row-discount">
-            <div class="price-row-left">
-              <p class="price-label">Founding Member Price <span class="save-tag">Save $46</span></p>
-              <p class="price-desc">Comment on my latest TikTok + DM me your archetype (<strong style="color:#f0d080">${r.name}</strong>) + agree to pre/post testimonial</p>
-            </div>
-            <p class="price-amount price-amount-discount">$97</p>
-          </div>
-        </div>
-        <a href="${PAYPAL}" target="_blank" class="cta-btn">&#10022; Reserve My Spot &#8212; Pay $143 Now</a>
-        <a href="${TIKTOK}" target="_blank" class="cta-btn cta-btn-gold">&#10022; Get Founding Member Price &#8212; $97</a>
-        <p class="cta-note">After paying, email <a href="mailto:${MY_EMAIL}" style="color:#c47a85">${MY_EMAIL}</a> with your name to confirm.<br>Registration closes July 5 at 7pm EST</p>
+        <a href="${CLARITY_CALL_LINK}${encodeURIComponent(r.name)}" target="_blank" class="cta-btn">&#10022; Book My Free Clarity Call</a>
+        <p class="cta-note">This is where you'll get the rest of your reading, your pricing options, and see if the pilot is the right fit &#8212; no pressure, no pitch.</p>
       </div>`;
 
     app.innerHTML=`<div class="screen">
@@ -284,14 +520,9 @@ function render(){
       </div>
       <div class="sun-card">
         <p class="sun-label">Your Path &#8594; Balance &amp; Abundance</p>
-        <p class="body-text">${r.movingForward}</p>
-        <div class="sun-inner">
-          <p class="sun-inner-label">&#9728; Your Abundant Energy</p>
-          <p class="sun-energy">${r.sunEnergy}</p>
-        </div>
-        <div class="balanced-box">
-          <p class="balanced-label">&#10022; Your Balanced Expression</p>
-          <p class="balanced-text">${r.balancedState}</p>
+        <div class="locked-box">
+          <div class="locked-icon">&#128274;</div>
+          <p class="locked-text">Your Sun-energy path, the exact NLP tools for ${r.name}, and what your balanced expression looks like are saved for your free Clarity Call &#8212; where Rose walks you through it live.</p>
         </div>
       </div>
       ${ctaSection}
@@ -331,48 +562,4 @@ function toggleBeliefs(){S.showBeliefs=!S.showBeliefs;render();}
 render();
 </script>
 </body>
-</html>'''
-
-with open('/mnt/user-data/outputs/index.html', 'w') as f:
-    f.write(full_file)
-
-with open('/mnt/user-data/outputs/index.html', 'r') as f:
-    c = f.read()
-
-checks = [
-    ('All 22 archetypes', c.count('referral:') == 22),
-    ('10 questions', c.count('{id:') == 10),
-    ('8 options per question', c.count('arcanas:["') >= 80),
-    ('Correct EmailJS key', 'UzY23e44cIij2M22R' in c),
-    ('Referral routing', 'referral-card' in c),
-    ('Balanced state shown', 'balancedState' in c),
-    ('Email function', 'sendResult' in c),
-    ('Toast notifications', 'showToast' in c),
-    ('PayPal button', 'paypal.me/1021rota/143' in c),
-    ('TikTok button', 'tiktok.com/@1021rota' in c),
-    ('July dates', 'July 11' in c),
-    ('Referral email link', 'Referral Request' in c),
-]
-print("Final verification:")
-for label,ok in checks:
-    print(f"  {'OK' if ok else 'MISSING'} {label}")
-print(f"\nFile: {len(c)} chars, {c.count(chr(10))} lines")
-PYEOF
-Output
-
-Final verification:
-  OK All 22 archetypes
-  OK 10 questions
-  OK 8 options per question
-  OK Correct EmailJS key
-  OK Referral routing
-  OK Balanced state shown
-  OK Email function
-  OK Toast notifications
-  OK PayPal button
-  OK TikTok button
-  OK July dates
-  OK Referral email link
-
-File: 55757 chars, 593 lines
-Done
+</html>
