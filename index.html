@@ -1,9 +1,18 @@
-<!DOCTYPE html>
+bash
+
+python3 - << 'PYEOF'
+with open('/mnt/user-data/outputs/quiz_data_22.js', 'r') as f:
+    quiz_data = f.read()
+
+# Remove the null entry
+quiz_data = quiz_data.replace("  HighPriestess2:null,\n", "")
+
+full_file = '''<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Which Major Arcana Is Running Your Life?</title>
+<title>Which Major Arcana Is Running Your Life? | 1021rota</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet"/>
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 <style>
@@ -16,13 +25,13 @@ body{background:#0d0b1a;color:#e8e0d0;font-family:'Jost',sans-serif;min-height:1
 @keyframes glow{from{box-shadow:0 0 8px #c9a84c44}to{box-shadow:0 0 22px #c9a84c88}}
 @keyframes spin{to{transform:rotate(360deg)}}
 #app{position:relative;z-index:1;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px 16px}
-.screen{max-width:620px;width:100%;animation:fadeUp .5s ease both}
+.screen{max-width:640px;width:100%;animation:fadeUp .5s ease both}
 .eyebrow{font-family:'Cormorant Garamond',serif;font-size:13px;letter-spacing:.3em;text-transform:uppercase;color:#c9a84c;text-align:center;margin-bottom:10px}
 .intro-icon{font-size:52px;text-align:center;margin-bottom:16px}
-.intro-title{font-family:'Cormorant Garamond',serif;font-size:clamp(30px,7vw,50px);font-weight:600;line-height:1.15;text-align:center;margin-bottom:18px;background:linear-gradient(135deg,#f0d080,#c47a85);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.intro-title{font-family:'Cormorant Garamond',serif;font-size:clamp(28px,7vw,50px);font-weight:600;line-height:1.15;text-align:center;margin-bottom:18px;background:linear-gradient(135deg,#f0d080,#c47a85);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
 .intro-sub{color:#8a82a0;font-size:15px;line-height:1.7;text-align:center;margin-bottom:10px}
 .intro-body{font-size:15px;line-height:1.75;text-align:center;margin-bottom:28px;color:#c8c0d8}
-.pills{display:flex;gap:20px;justify-content:center;flex-wrap:wrap;margin-bottom:32px}
+.pills{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-bottom:32px}
 .pill{color:#c9a84c;font-size:13px;display:flex;align-items:center;gap:6px}
 .pill-dot{color:#c47a85}
 .prog-row{display:flex;justify-content:space-between;margin-bottom:8px}
@@ -30,12 +39,12 @@ body{background:#0d0b1a;color:#e8e0d0;font-family:'Jost',sans-serif;min-height:1
 .prog-track{height:2px;background:#2e2857;border-radius:2px;margin-bottom:28px}
 .prog-fill{height:100%;background:linear-gradient(90deg,#c9a84c,#c47a85);border-radius:2px;transition:width .4s ease}
 .card{background:#14112b;border:1px solid #2e2857;border-radius:12px;padding:26px 22px;margin-bottom:18px}
-.q-text{font-family:'Cormorant Garamond',serif;font-size:clamp(18px,4vw,23px);line-height:1.45;color:#f0d080;margin-bottom:22px}
-.options{display:flex;flex-direction:column;gap:10px}
-.opt-btn{background:#14112b;border:1px solid #2e2857;color:#e8e0d0;font-family:'Jost',sans-serif;font-size:15px;font-weight:300;padding:13px 16px;border-radius:8px;cursor:pointer;text-align:left;width:100%;transition:border-color .2s,background .2s,transform .15s;line-height:1.5}
-.opt-btn:hover{border-color:#c9a84c;background:#1c1840;transform:translateX(4px)}
+.q-text{font-family:'Cormorant Garamond',serif;font-size:clamp(17px,4vw,22px);line-height:1.45;color:#f0d080;margin-bottom:22px}
+.options{display:flex;flex-direction:column;gap:9px}
+.opt-btn{background:#14112b;border:1px solid #2e2857;color:#e8e0d0;font-family:'Jost',sans-serif;font-size:14px;font-weight:300;padding:12px 15px;border-radius:8px;cursor:pointer;text-align:left;width:100%;transition:border-color .2s,background .2s,transform .15s;line-height:1.5}
+.opt-btn:hover{border-color:#c9a84c;background:#1c1840;transform:translateX(3px)}
 .opt-btn.chosen{border-color:#c9a84c;background:#1c1840;animation:glow 1.5s ease-in-out infinite alternate}
-.opt-letter{color:#c9a84c;margin-right:10px;font-size:13px}
+.opt-letter{color:#c9a84c;margin-right:9px;font-size:12px}
 .nav{display:flex;justify-content:space-between;align-items:center}
 .ghost-btn{background:transparent;border:1px solid #2e2857;color:#8a82a0;font-family:'Jost',sans-serif;font-size:14px;padding:10px 20px;border-radius:6px;cursor:pointer;transition:border-color .2s,color .2s}
 .ghost-btn:hover{border-color:#8a82a0;color:#e8e0d0}
@@ -51,246 +60,114 @@ body{background:#0d0b1a;color:#e8e0d0;font-family:'Jost',sans-serif;min-height:1
 .body-text{line-height:1.8;font-size:15px;color:#e8e0d0}
 .shadow-box{background:#0f0c20;border:1px solid #2e2857;border-radius:8px;padding:14px 18px;margin-bottom:14px;border-left:3px solid var(--arc-color)}
 .shadow-label{color:#8a82a0;font-size:12px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:4px}
-.shadow-text{font-family:'Cormorant Garamond',serif;font-size:17px;font-style:italic}
+.shadow-text{font-family:'Cormorant Garamond',serif;font-size:16px;font-style:italic}
 .beliefs-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
 .toggle-btn{background:transparent;border:1px solid #c9a84c66;color:#c9a84c;font-family:'Jost',sans-serif;font-size:12px;letter-spacing:.06em;text-transform:uppercase;padding:7px 14px;border-radius:4px;cursor:pointer;transition:background .2s}
 .toggle-btn:hover{background:#c9a84c22}
-.belief-chip{background:#1e1a38;border:1px solid #2e2857;color:#8a82a0;font-family:'Jost',sans-serif;font-size:14px;font-style:italic;padding:10px 14px;border-radius:6px;line-height:1.5;margin-bottom:8px;display:none}
+.belief-chip{background:#1e1a38;border:1px solid #2e2857;color:#8a82a0;font-family:'Jost',sans-serif;font-size:13px;font-style:italic;padding:10px 14px;border-radius:6px;line-height:1.5;margin-bottom:8px;display:none}
 .belief-chip.show{display:block}
 .sun-card{background:linear-gradient(135deg,#1a1530,#0f1020);border:1px solid #f5c84244;border-radius:12px;padding:22px;margin-bottom:14px}
 .sun-label{font-family:'Cormorant Garamond',serif;font-size:12px;letter-spacing:.25em;text-transform:uppercase;color:#f5c842;margin-bottom:10px}
-.sun-inner{background:#0d0b1a;border:1px solid #f5c84233;border-radius:8px;padding:13px 16px;margin-top:14px}
+.balanced-box{background:#0d0b1a;border:1px solid #4a8060;border-radius:8px;padding:13px 16px;margin-top:12px}
+.balanced-label{color:#60b080;font-size:11px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:5px}
+.balanced-text{color:#90d0a8;font-family:'Cormorant Garamond',serif;font-size:16px;font-style:italic}
+.sun-inner{background:#0d0b1a;border:1px solid #f5c84233;border-radius:8px;padding:13px 16px;margin-top:12px}
 .sun-inner-label{color:#8a82a0;font-size:11px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:5px}
-.sun-energy{color:#f5c842;font-family:'Cormorant Garamond',serif;font-size:17px}
+.sun-energy{color:#f5c842;font-family:'Cormorant Garamond',serif;font-size:16px}
 .cta-card{background:#14112b;border:1px solid #c47a8555;border-radius:12px;padding:26px 22px;text-align:center;margin-bottom:14px}
-.cta-title{font-family:'Cormorant Garamond',serif;font-size:clamp(19px,4vw,27px);font-weight:600;color:#f0d080;margin-bottom:10px}
+.cta-title{font-family:'Cormorant Garamond',serif;font-size:clamp(18px,4vw,26px);font-weight:600;color:#f0d080;margin-bottom:10px}
 .cta-body{color:#8a82a0;font-size:15px;line-height:1.7;margin-bottom:16px}
-.session-box{background:#0f0c20;border:1px solid #c9a84c33;border-radius:8px;padding:16px 18px;margin-bottom:18px;text-align:left}
-.session-box-title{color:#c9a84c;font-size:12px;letter-spacing:.15em;text-transform:uppercase;margin-bottom:10px}
-.session-row{display:flex;align-items:flex-start;gap:10px;padding:7px 0;border-bottom:1px solid #1e1a38;font-size:14px;color:#c8c0d8;line-height:1.5}
+.referral-card{background:#0f1020;border:1px solid #4a6080;border-radius:12px;padding:22px;text-align:center;margin-bottom:14px}
+.referral-title{font-family:'Cormorant Garamond',serif;font-size:22px;color:#90b8e0;margin-bottom:8px}
+.referral-body{color:#8a82a0;font-size:14px;line-height:1.7;margin-bottom:16px}
+.session-box{background:#0f0c20;border:1px solid #c9a84c33;border-radius:8px;padding:14px 16px;margin-bottom:16px;text-align:left}
+.session-box-title{color:#c9a84c;font-size:11px;letter-spacing:.15em;text-transform:uppercase;margin-bottom:10px}
+.session-row{display:flex;align-items:flex-start;gap:10px;padding:6px 0;border-bottom:1px solid #1e1a38;font-size:13px;color:#c8c0d8;line-height:1.5}
 .session-row:last-child{border-bottom:none}
-.session-dot{color:#c47a85;font-size:10px;margin-top:4px;flex-shrink:0}
+.session-dot{color:#c47a85;font-size:9px;margin-top:4px;flex-shrink:0}
 .price-box{background:#0f0c20;border:1px solid #2e2857;border-radius:10px;padding:6px;margin-bottom:16px;text-align:left}
-.price-box-title{color:#c9a84c;font-size:12px;letter-spacing:.15em;text-transform:uppercase;padding:10px 12px 6px}
-.price-row{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:14px 12px;border-radius:8px}
+.price-box-title{color:#c9a84c;font-size:11px;letter-spacing:.15em;text-transform:uppercase;padding:10px 12px 6px}
+.price-row{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:12px;border-radius:8px}
 .price-row-discount{background:#1c1530;border:1px solid #c9a84c55}
 .price-row-left{flex:1}
 .price-label{font-size:14px;color:#e8e0d0;line-height:1.5;margin-bottom:3px}
 .save-tag{display:inline-block;background:#2e1a20;color:#c47a85;font-size:11px;padding:2px 8px;border-radius:10px;margin-left:6px;letter-spacing:.03em;vertical-align:middle}
-.price-desc{font-size:12.5px;color:#8a82a0;line-height:1.6}
+.price-desc{font-size:12px;color:#8a82a0;line-height:1.6}
 .price-amount{font-family:'Cormorant Garamond',serif;font-size:24px;color:#8a82a0;white-space:nowrap}
 .price-amount-discount{color:#f0d080;font-weight:600;font-size:28px}
-.feature-pills{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:18px}
-.feature-pill{background:#1a1530;border:1px solid #2e2857;color:#8a82a0;font-size:12px;padding:5px 13px;border-radius:20px}
-.cta-btn{background:linear-gradient(135deg,#c47a85,#a04050);border:none;color:#fff;font-family:'Jost',sans-serif;font-size:16px;font-weight:500;letter-spacing:.06em;padding:17px 36px;border-radius:6px;cursor:pointer;transition:opacity .2s,transform .15s;width:100%;margin-bottom:10px;display:block;text-decoration:none;text-align:center}
+.feature-pills{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:16px}
+.feature-pill{background:#1a1530;border:1px solid #2e2857;color:#8a82a0;font-size:12px;padding:5px 12px;border-radius:20px}
+.cta-btn{background:linear-gradient(135deg,#c47a85,#a04050);border:none;color:#fff;font-family:'Jost',sans-serif;font-size:15px;font-weight:500;letter-spacing:.06em;padding:16px 36px;border-radius:6px;cursor:pointer;transition:opacity .2s,transform .15s;width:100%;margin-bottom:10px;display:block;text-decoration:none;text-align:center}
 .cta-btn:hover{opacity:.88;transform:scale(1.01)}
 .cta-btn-gold{background:linear-gradient(135deg,#c9a84c,#a07830);color:#0d0b1a}
+.cta-btn-blue{background:linear-gradient(135deg,#4a80c0,#2a5090);color:#fff}
 .spots-badge{display:inline-block;background:#2e1a20;border:1px solid #c47a8566;color:#c47a85;font-size:12px;padding:4px 12px;border-radius:20px;margin-bottom:14px;letter-spacing:.05em}
 .cta-note{color:#8a82a0;font-size:13px;line-height:1.7;margin-top:10px}
 .retake-row{text-align:center;margin-top:20px}
 .spinner{width:32px;height:32px;border:3px solid #2e2857;border-top-color:#c9a84c;border-radius:50%;animation:spin 1s linear infinite;margin:0 auto 16px}
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);font-family:'Jost',sans-serif;font-size:14px;padding:12px 24px;border-radius:8px;z-index:999;text-align:center;max-width:340px;transition:opacity .3s}
+.toast-success{background:#1c3020;border:1px solid #4a8a5a;color:#a0d0a8}
+.toast-error{background:#301c1c;border:1px solid #8a4a4a;color:#d0a0a0}
 </style>
 </head>
 <body>
 <div id="stars"></div>
 <div id="app"></div>
 <script>
-// ── EmailJS credentials only — no Airtable token in this file ──
 const EJS_KEY  = 'UzY23e44cIij2M22R';
 const EJS_SVC  = 'service_qcah0cd';
 const EJS_TPL  = 'template_5np0yop';
 const PAYPAL   = 'https://paypal.me/1021rota/143';
 const TIKTOK   = 'https://www.tiktok.com/@1021rota';
 const MY_EMAIL = '1021rota@gmail.com';
-
 emailjs.init(EJS_KEY);
 
-// ── Stars ──
 const starsEl=document.getElementById('stars');
 for(let i=0;i<80;i++){const s=document.createElement('div');s.className='star';const sz=Math.random()*2+0.5;s.style.cssText=`top:${Math.random()*100}%;left:${Math.random()*100}%;width:${sz}px;height:${sz}px;opacity:${Math.random()*.5+.2};animation-duration:${2+Math.random()*3}s;animation-delay:${Math.random()*2}s`;starsEl.appendChild(s);}
 
-const QUESTIONS=[
-  {id:1,text:"When you face an important decision, what happens inside you?",options:[
-    {text:"My mind spins in circles — I can't land anywhere",arcanas:["Moon","Hermit"]},
-    {text:"I freeze and wait for a sign or the 'right moment'",arcanas:["Hanged","Moon"]},
-    {text:"I research endlessly but never feel ready enough",arcanas:["Hermit","Hierophant"]},
-    {text:"I second-guess every option until the window closes",arcanas:["Justice","Lovers"]},
-    {text:"I act fast but often regret it or burn things down",arcanas:["Tower","Chariot"]},
-    {text:"I defer to what others expect of me",arcanas:["Hierophant","Lovers"]},
-  ]},
-  {id:2,text:"What does your inner critic sound like most of the time?",options:[
-    {text:"\"You don't know enough yet to move forward\"",arcanas:["Hermit","Hierophant"]},
-    {text:"\"Something bad will happen if you get it wrong\"",arcanas:["Moon","Tower"]},
-    {text:"\"Who do you think you are to want more?\"",arcanas:["HighPriestess","Wheel"]},
-    {text:"\"You have to be fair to everyone — including people who hurt you\"",arcanas:["Justice","Judgement"]},
-    {text:"\"You always do this — nothing ever changes\"",arcanas:["Wheel","Devil"]},
-    {text:"\"You need to figure this out alone. Don't burden anyone.\"",arcanas:["Hermit","Hanged"]},
-  ]},
-  {id:3,text:"When you imagine the life you really want, what gets in the way?",options:[
-    {text:"I don't fully believe I deserve it",arcanas:["Moon","Devil"]},
-    {text:"I don't know what I want — it keeps shifting",arcanas:["Moon","Lovers"]},
-    {text:"Fear of what I'd have to give up or lose",arcanas:["Devil","Hanged"]},
-    {text:"Fear of judgment or breaking the rules",arcanas:["Hierophant","Justice"]},
-    {text:"I worry I'd destroy something good in the process",arcanas:["Tower","Chariot"]},
-    {text:"I'm waiting until conditions are perfect",arcanas:["Hermit","Wheel"]},
-  ]},
-  {id:4,text:"How do you relate to your own emotions?",options:[
-    {text:"I feel everything deeply but don't know what to do with it",arcanas:["Moon","HighPriestess"]},
-    {text:"I suppress them and push through",arcanas:["Chariot","Tower"]},
-    {text:"I analyze them to death instead of feeling them",arcanas:["Hermit","Justice"]},
-    {text:"I feel guilty for having needs or wants",arcanas:["Hierophant","Devil"]},
-    {text:"My emotions swing unpredictably and scare me",arcanas:["Moon","Wheel"]},
-    {text:"I wait to see how others feel before I decide how I feel",arcanas:["Lovers","HighPriestess"]},
-  ]},
-  {id:5,text:"What pattern shows up most in your relationships?",options:[
-    {text:"I give too much and end up invisible or depleted",arcanas:["Hierophant","Devil"]},
-    {text:"I pull away when things get too close or too real",arcanas:["Hermit","Hanged"]},
-    {text:"I attract chaos or people who need rescuing",arcanas:["Tower","Moon"]},
-    {text:"I people-please to keep the peace",arcanas:["Justice","Lovers"]},
-    {text:"I hold everything inside until I explode or disappear",arcanas:["Tower","Devil"]},
-    {text:"I struggle to trust my own read on people",arcanas:["Moon","HighPriestess"]},
-  ]},
-  {id:6,text:"What does \"taking action\" feel like for you right now?",options:[
-    {text:"Terrifying — I might fail publicly",arcanas:["Moon","Tower"]},
-    {text:"Pointless — things never really change for me",arcanas:["Wheel","Devil"]},
-    {text:"Selfish — I should be putting others first",arcanas:["Hierophant","Justice"]},
-    {text:"Impossible — I don't know which direction is right",arcanas:["Lovers","Moon"]},
-    {text:"Dangerous — something will break if I push too hard",arcanas:["Tower","Chariot"]},
-    {text:"Premature — I'm still figuring things out",arcanas:["Hermit","Hanged"]},
-  ]},
-  {id:7,text:"When you've succeeded in the past, what usually happened next?",options:[
-    {text:"I immediately worried it would be taken away",arcanas:["Moon","Wheel"]},
-    {text:"I undermined it somehow or walked away",arcanas:["Tower","Devil"]},
-    {text:"I moved the goalposts — it was never enough",arcanas:["Chariot","Hermit"]},
-    {text:"I minimized it or gave credit to everyone but myself",arcanas:["HighPriestess","Justice"]},
-    {text:"I felt guilty, like I didn't deserve it",arcanas:["Hierophant","Devil"]},
-    {text:"I wasn't sure it was really 'my' success — maybe luck",arcanas:["Wheel","Hanged"]},
-  ]},
-  {id:8,text:"What would change in your life if you stopped overthinking?",options:[
-    {text:"I'd finally start the thing I've been delaying for years",arcanas:["Hermit","Hanged"]},
-    {text:"I'd leave the situation that drains me",arcanas:["Devil","Tower"]},
-    {text:"I'd ask for what I actually want",arcanas:["Moon","Hierophant"]},
-    {text:"I'd stop performing and be more honest",arcanas:["Lovers","HighPriestess"]},
-    {text:"I'd trust myself more and need less reassurance",arcanas:["Moon","Justice"]},
-    {text:"I'd stop waiting for permission and just go",arcanas:["Chariot","Wheel"]},
-  ]},
-];
+''' + quiz_data + '''
 
-const ARCANA={
-  Moon:{name:"The Moon",symbol:"🌑",headline:"The Overthinker in the Dark",color:"#b8c4d8",
-    imbalance:"You live in the land between what is real and what is feared. Your imagination is vivid and your intuition is powerful — but in imbalance, you can't tell the difference between a genuine signal and anxiety dressed up as knowing. You second-guess yourself constantly, avoid clarity because clarity feels dangerous, and stay suspended in uncertainty because deciding means risking.",
-    limitingBeliefs:["\"If I stay uncertain, I can't be wrong.\"","\"My feelings aren't trustworthy — but neither is logic.\"","\"Something bad will happen if I get too visible.\"","\"I need to understand everything before I move.\""],
-    shadow:"Fear disguised as intuition. You mistake anxiety for wisdom and call inaction 'waiting for the right sign.'",
-    movingForward:"Your path toward The Sun — not by eliminating your sensitivity, but by letting light into the fog. You don't need certainty; you need one honest step. Picture knowing, within seconds, whether a fear is real signal or just noise — that clarity becomes automatic, and you start moving while everyone else is still spinning. Your intuition is real. The work is learning to trust it.",
-    sunEnergy:"Clarity. Visibility. Joyful confidence. Acting without needing to know the outcome first."},
-  Hermit:{name:"The Hermit",symbol:"🪔",headline:"The Seeker Who Never Arrives",color:"#8a82a0",
-    imbalance:"You have wisdom, depth, and an inner knowing that others admire. But in imbalance, you use your quest for understanding as a reason to never land. More research, more preparation, more time alone to figure it out — this is the story you tell. The lantern you carry illuminates the next step, but you refuse to take it because you might need to illuminate one more.",
-    limitingBeliefs:["\"I'm not ready yet.\"","\"I need to understand this fully before I share it.\"","\"Other people won't get it unless I can explain it perfectly.\"","\"Solitude is where I do my best work — connection is a distraction.\""],
-    shadow:"Isolation disguised as discernment. Preparation as permanent postponement.",
-    movingForward:"Your path is toward The Sun — bringing your lantern out of the cave and letting others see it. You already know enough. The missing piece isn't more information; it's a willingness to be seen before you're perfect. You'll feel 'not ready yet' loosen its grip almost overnight, replaced by a steady 'ready enough' — and you'll start putting your work out into the world while it's still becoming.",
-    sunEnergy:"Generous sharing. Visible leadership. Trusting that your wisdom is enough, right now."},
-  Tower:{name:"The Tower",symbol:"⚡",headline:"The Disruptor Who Fears Her Own Power",color:"#e07060",
-    imbalance:"You know, somewhere deep, that the structures around you aren't built on truth. You've either already watched things collapse — relationships, careers, self-images — or you live in quiet terror that they will. In imbalance, you either unconsciously blow things up before they can disappoint you, or you grip so tight to what's left that no air gets in.",
-    limitingBeliefs:["\"If I grow too much, I'll destroy what I love.\"","\"Chaos always finds me — why try?\"","\"The last time I took a risk, everything fell apart.\"","\"I have to control my environment or something bad happens.\""],
-    shadow:"Self-sabotage as self-protection. Burning it down before someone else can.",
-    movingForward:"Your path is toward The Sun — understanding that the lightning that struck cleared the ground for something true to be built. Collapse was not punishment; it was prerequisite. You'll start catching the difference between a self-sabotaging impulse and a necessary release in real time — and choose to build instead of brace for the next blow.",
-    sunEnergy:"Intentional rebuilding. Courage to create. Freedom from bracing for impact."},
-  Devil:{name:"The Devil",symbol:"⛓️",headline:"The One Who Believes She Can't Leave",color:"#9060b0",
-    imbalance:"The chains in this card are loose — the figures could remove them. That's the cruelest part of this archetype: you're not actually trapped, but you believe you are. The bondage is a story. It might be a relationship, a job, an identity, a habit, or a belief system that tells you this is just how it is for someone like you.",
-    limitingBeliefs:["\"I don't have what it takes to have more than this.\"","\"I'd lose everything if I actually changed.\"","\"This is just who I am.\"","\"I've tried before and it didn't work.\""],
-    shadow:"Learned helplessness. Using past evidence to make the future fixed.",
-    movingForward:"Your path is toward The Sun — recognizing that the door was never locked from the outside. Once you find the exact moment this story started, its grip loosens almost immediately — choices that felt impossible last month start to feel obvious. You are not your patterns. You are the one who can see them.",
-    sunEnergy:"Liberation. Full self-ownership. Taking up space without apology."},
-  Hierophant:{name:"The Hierophant",symbol:"🏛️",headline:"The Rule-Follower Waiting for Permission",color:"#c9a84c",
-    imbalance:"You were taught — by family, religion, culture, school — what 'correct' looks like. In balance, tradition grounds you. In imbalance, it imprisons you. You shape yourself to external standards and call it integrity. You wait for authority to sanction your next move and call it discernment.",
-    limitingBeliefs:["\"I need someone with authority to validate this before I proceed.\"","\"Good people put others first.\"","\"Breaking from tradition means I'm selfish or wrong.\"","\"I should have figured this out by now.\""],
-    shadow:"Outsourced authority. Confusing compliance with virtue.",
-    movingForward:"Your path is toward The Sun — reclaiming your own inner authority. The system you were handed was built by people with their own agendas. Your values, examined consciously and chosen freely, are more trustworthy than inherited rules.",
-    sunEnergy:"Self-authority. Chosen values. Leading from your own knowing."},
-  Justice:{name:"Justice",symbol:"⚖️",headline:"The Fair Witness Who Can't Rule in Her Own Favor",color:"#70a0c0",
-    imbalance:"You have a profound sense of right and wrong. You see all sides. You weigh everything carefully. But in imbalance, this becomes paralysis — you can't act until you're certain it's perfectly fair. You apply more mercy to others than to yourself.",
-    limitingBeliefs:["\"I have to consider everyone's perspective before I decide.\"","\"My needs don't outweigh others' feelings.\"","\"If I can't be perfectly objective, I shouldn't act at all.\"","\"It's not fair to put myself first.\""],
-    shadow:"Fairness used as self-erasure. Chronic over-responsibility for others' experience.",
-    movingForward:"Your path is toward The Sun — applying the same compassion to yourself that you extend so generously to everyone else. You are allowed to rule in your own favor. You'll start instinctively advocating for your own needs with the same fierce fairness you've always given everyone else — without the guilt tax.",
-    sunEnergy:"Self-advocacy. Clear boundaries. Acting decisively from your own truth."},
-  Lovers:{name:"The Lovers",symbol:"💞",headline:"The One Who Can't Choose Herself",color:"#c47a85",
-    imbalance:"This card is about alignment — values, desires, authentic choice. In imbalance, you chase connection and approval so that others can tell you who you are. You shape-shift to be lovable. You avoid committing to yourself because commitment means disappointing someone.",
-    limitingBeliefs:["\"If I fully choose myself, I'll end up alone.\"","\"I don't really know what I want — maybe I want what they want.\"","\"My worth depends on being chosen.\"","\"Love means sacrifice.\""],
-    shadow:"Identity outsourcing. Mistaking self-abandonment for love.",
-    movingForward:"Your path is toward The Sun — learning that clarity about who you are makes you more magnetic, not less lovable. Choosing yourself will stop feeling like betrayal and start feeling like relief — and the people worth keeping will lean in closer, not away.",
-    sunEnergy:"Wholeness. Authentic desire. Choosing yourself as the foundation of all love."},
-  HighPriestess:{name:"The High Priestess",symbol:"🌙",headline:"The Keeper of Knowing Who Stays Silent",color:"#8080c0",
-    imbalance:"Your inner world is rich, layered, and profound. You sense things others miss. But in imbalance, you keep it all inside — guarding your gifts like a secret, waiting until you're certain, until it's safe. You've made your inner life so private it's become a prison.",
-    limitingBeliefs:["\"I need to be certain before I speak.\"","\"If I share too much, I'll be misunderstood.\"","\"My inner knowing isn't 'enough' — I need proof.\"","\"It's safer to observe than to participate.\""],
-    shadow:"Wisdom as withholding. Depth as distance.",
-    movingForward:"Your path is toward The Sun — bringing your inner knowing into the world. You were not given your gifts to hold them alone. Speaking up will stop requiring courage and start requiring only breath — the words will simply arrive when you need them.",
-    sunEnergy:"Expressed wisdom. Confident voice. Trusting yourself to speak and be received."},
-  Hanged:{name:"The Hanged Man",symbol:"🔄",headline:"The Suspended One Who Calls It Surrender",color:"#60b090",
-    imbalance:"There is genuine wisdom in the pause. But in imbalance, the pause becomes permanent. You are waiting — for clarity, for the right moment, for circumstances to change. You've spiritualized your stuckness, calling it 'trusting the process.' Meanwhile, time passes and the life you want stays hypothetical.",
-    limitingBeliefs:["\"I'll know when the time is right.\"","\"I shouldn't force things.\"","\"If I wait long enough, it will become clear.\"","\"Moving forward feels like giving up on something important.\""],
-    shadow:"Spiritual bypassing. Using surrender as avoidance.",
-    movingForward:"Your path is toward The Sun — understanding that action creates clarity that waiting never will. You'll start feeling a clean, embodied 'yes' the moment it's genuinely time to move — and stop mistaking peace for permission to stall.",
-    sunEnergy:"Decisive movement. Trust through action. Releasing what keeps you upside-down."},
-  Chariot:{name:"The Chariot",symbol:"🏆",headline:"The Achiever Who Can't Stop to Receive",color:"#c0a030",
-    imbalance:"You are driven, disciplined, and determined. But in imbalance, the momentum never stops because stopping feels like dying. You push harder when you're afraid. You achieve your way past your feelings and confuse rest with failure.",
-    limitingBeliefs:["\"If I stop driving, everything will fall apart.\"","\"I can outwork my way through any obstacle.\"","\"Emotions are a distraction from goals.\"","\"I don't deserve to rest until I've earned it.\""],
-    shadow:"Achievement as avoidance. Willpower substituted for wisdom.",
-    movingForward:"Your path is toward The Sun — learning to receive as well as achieve. The Sun is radiant rather than driven; it doesn't chase, it attracts. Rest will stop feeling like falling behind, and you'll notice results start arriving with less grinding and more ease.",
-    sunEnergy:"Purposeful flow. Ease in achievement. Leading from joy, not urgency."},
-  Wheel:{name:"Wheel of Fortune",symbol:"🎡",headline:"The One Who Waits for the Wheel to Turn",color:"#b07040",
-    imbalance:"You've learned that life is cyclical and outcomes are unpredictable. But in imbalance, this becomes a reason to abdicate agency. You wait for luck to shift. You've outsourced your power to fate and called it wisdom.",
-    limitingBeliefs:["\"I can't control what happens to me.\"","\"When it's my time, it will happen.\"","\"I've tried before and the timing was wrong.\"","\"Things always seem to work out for other people, not me.\""],
-    shadow:"Fatalism dressed as faith. Passive waiting called trust.",
-    movingForward:"Your path is toward The Sun — reclaiming that you are a force within the cycle. You'll start noticing, in real time, the exact moments your own choices tip the odds — and begin using that leverage on purpose instead of waiting on luck.",
-    sunEnergy:"Co-creation. Intentional momentum. Owning your power within life's cycles."},
-  Judgement:{name:"Judgement",symbol:"🎺",headline:"The One Awaiting the Call She's Already Heard",color:"#a0c0a0",
-    imbalance:"You've had the awakening. You've felt the call. Something in you knows what you're here to do — and yet you haven't answered. You're waiting for more signs, absolute certainty, a louder trumpet. The horn has already sounded. You just haven't risen yet.",
-    limitingBeliefs:["\"I need to be sure this is really my calling.\"","\"I have too much to atone for before I can fully step forward.\"","\"What if I answer and I'm wrong?\"","\"I'm not ready to be that visible yet.\""],
-    shadow:"Calling deferred. Readiness used as a gatekeeper for destiny.",
-    movingForward:"Your path is toward The Sun — understanding that the call doesn't get louder, only more insistent. You'll catch yourself already acting like the person who answered — speaking, applying, showing up — before you've consciously decided to.",
-    sunEnergy:"Answered calling. Purposeful visibility. Rising fully into who you already are."},
-};
+function score(answers){
+  const t={};
+  answers.forEach(a=>{if(!a)return;a.arcanas.forEach(k=>{t[k]=(t[k]||0)+1;});});
+  const sorted=Object.entries(t).sort((a,b)=>b[1]-a[1]);
+  const top=sorted[0]?.[0]||'Moon';
+  return ARCANA[top]||ARCANA.Moon;
+}
 
-// ── Scoring ──
-function score(answers){const t={};answers.forEach(a=>{if(!a)return;a.arcanas.forEach(k=>{t[k]=(t[k]||0)+1;});});const top=Object.entries(t).sort((a,b)=>b[1]-a[1])[0]?.[0]||'Moon';return ARCANA[top]||ARCANA.Moon;}
+function showToast(msg,type){
+  const d=document.createElement('div');
+  d.className='toast toast-'+type;
+  d.textContent=msg;
+  document.body.appendChild(d);
+  setTimeout(()=>{d.style.opacity='0';setTimeout(()=>d.remove(),300)},5000);
+}
 
-// ── EmailJS: sends full result to client AND BCC to Rose ──
-async function sendResult(name,email,archetype,path,sunEnergy,beliefs,summary){
+async function sendResult(name,email,archetype,path,sunEnergy,beliefs,balanced,summary){
   try{
-    const r=await emailjs.send(EJS_SVC, EJS_TPL,{
-      to_name:       name||'Friend',
-      to_email:      email,
-      archetype:     archetype,
-      path_forward:  path,
-      sun_energy:    sunEnergy,
-      beliefs:       beliefs,
-      answer_summary: summary,
-      session_dates: '4 Saturdays at 11am (NY, USA): July 11, July 18, July 25 & August 1',
-      coach_email:   MY_EMAIL,
-      reply_to:      MY_EMAIL,
+    const r=await emailjs.send(EJS_SVC,EJS_TPL,{
+      to_name:name||'Friend',
+      to_email:email,
+      archetype:archetype,
+      path_forward:path,
+      sun_energy:sunEnergy,
+      beliefs:beliefs,
+      balanced_state:balanced,
+      answer_summary:summary,
+      session_dates:'July 6 at 7:00pm / July 11 at 12:00pm / July 18 at 12:00pm / July 25 at 12:00pm (all EST)',
+      coach_email:MY_EMAIL,
+      reply_to:MY_EMAIL,
     });
-    console.log('Email sent - status:',r.status,r.text);
-    // Show visible confirmation on screen
-    const note=document.createElement('div');
-    note.style.cssText='position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#1c3020;border:1px solid #4a8a5a;color:#a0d0a8;font-family:Jost,sans-serif;font-size:14px;padding:12px 24px;border-radius:8px;z-index:999;text-align:center';
-    note.textContent='Your reading has been emailed to '+email;
-    document.body.appendChild(note);
-    setTimeout(()=>note.remove(),6000);
+    console.log('Email OK:',r.status);
+    showToast('Your reading has been emailed to '+email,'success');
   }catch(e){
-    console.error('EmailJS failed:',JSON.stringify(e));
-    // Show visible error on screen
-    const note=document.createElement('div');
-    note.style.cssText='position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#301c1c;border:1px solid #8a4a4a;color:#d0a0a0;font-family:Jost,sans-serif;font-size:13px;padding:12px 24px;border-radius:8px;z-index:999;text-align:center;max-width:320px';
-    note.textContent='Email error: '+JSON.stringify(e).substring(0,80);
-    document.body.appendChild(note);
-    setTimeout(()=>note.remove(),8000);
+    console.error('EmailJS error:',JSON.stringify(e));
+    showToast('Email: '+JSON.stringify(e).substring(0,60),'error');
   }
 }
 
-// ── State ──
 let S={screen:'intro',current:0,answers:[],selected:null,showBeliefs:false,name:'',email:'',result:null};
 
-// ── Render ──
 function render(){
   const app=document.getElementById('app');
   if(S.screen==='intro'){
@@ -298,20 +175,22 @@ function render(){
       <div class="intro-icon">&#10022;</div>
       <p class="eyebrow">Sacred Archetype Reading</p>
       <h1 class="intro-title">Which Major Arcana<br>Is Running Your Life?</h1>
-      <p class="intro-sub">Overthinking isn't a character flaw &#8212; it's an archetype in imbalance.</p>
-      <p class="intro-body">This 8-question reading reveals the Major Arcana energy keeping you stuck, the limiting belief beneath it, and your path into Sun energy &#8212; where action, clarity, and confidence live.</p>
+      <p class="intro-sub">Every pattern has a name. Every block has an archetype beneath it.</p>
+      <p class="intro-body">This 10-question reading identifies which of the 22 Major Arcana is most active in your life right now — where it's keeping you stuck, the belief driving it, and the path into your most aligned, abundant self.</p>
       <div class="pills">
-        <span class="pill"><span class="pill-dot">&#10022;</span> 5 minutes</span>
-        <span class="pill"><span class="pill-dot">&#10022;</span> No tarot knowledge needed</span>
+        <span class="pill"><span class="pill-dot">&#10022;</span> 7 minutes</span>
+        <span class="pill"><span class="pill-dot">&#10022;</span> All 22 archetypes</span>
         <span class="pill"><span class="pill-dot">&#10022;</span> Deeply personal</span>
       </div>
       <div style="text-align:center">
         <button class="next-btn" style="font-size:16px;padding:16px 52px" onclick="startQuiz()">Begin Your Reading</button>
-        <p style="margin-top:16px;color:#8a82a0;font-size:13px">Answer honestly &#8212; choose what feels most true, not most spiritual.</p>
+        <p style="margin-top:16px;color:#8a82a0;font-size:13px">Choose the answer that feels most true right now &#8212; not most spiritual.</p>
       </div>
     </div>`;
   } else if(S.screen==='quiz'){
-    const q=QUESTIONS[S.current];const pct=Math.round((S.current/QUESTIONS.length)*100);const L='ABCDEF';
+    const q=QUESTIONS[S.current];
+    const pct=Math.round((S.current/QUESTIONS.length)*100);
+    const L='ABCDEFGH';
     const opts=q.options.map((o,i)=>`<button class="opt-btn${S.selected===i?' chosen':''}" onclick="selectOpt(${i})"><span class="opt-letter">${L[i]}.</span>${o.text}</button>`).join('');
     app.innerHTML=`<div class="screen">
       <div class="prog-row"><span class="prog-label">Question ${S.current+1} of ${QUESTIONS.length}</span><span class="prog-pct">${pct}% complete</span></div>
@@ -323,36 +202,79 @@ function render(){
       </div>
     </div>`;
   } else if(S.screen==='contact'){
-    app.innerHTML=`<div class="screen">
-      <div class="card">
-        <p class="eyebrow" style="text-align:left;margin-bottom:8px">One Last Step</p>
-        <p style="font-family:'Cormorant Garamond',serif;font-size:clamp(20px,4vw,27px);color:#f0d080;margin-bottom:8px;line-height:1.3">Where should we send your reading?</p>
-        <p style="color:#8a82a0;font-size:14px;line-height:1.6;margin-bottom:22px">Enter your name and email to reveal your result. Rose will also email you your full archetype reading and path forward.</p>
-        <label class="form-label">First name</label>
-        <input class="form-input" id="inp-name" type="text" placeholder="e.g. Sarah" value="${S.name}" oninput="S.name=this.value"/>
-        <label class="form-label">Email address</label>
-        <input class="form-input" id="inp-email" type="email" placeholder="you@email.com" value="${S.email}" oninput="S.email=this.value"/>
-        <button class="next-btn" style="width:100%;padding:15px;font-size:15px" onclick="submitContact()">Reveal My Archetype &#10022;</button>
-        <p class="privacy-note">Your information is private and never shared or sold.</p>
-      </div>
-      <div style="text-align:center;margin-top:14px">
-        <button class="ghost-btn" onclick="skipContact()">Skip &#8212; just show me my result</button>
-      </div>
-    </div>`;
+    app.innerHTML=`<div class="screen"><div class="card">
+      <p class="eyebrow" style="text-align:left;margin-bottom:8px">One Last Step</p>
+      <p style="font-family:'Cormorant Garamond',serif;font-size:clamp(20px,4vw,27px);color:#f0d080;margin-bottom:8px;line-height:1.3">Where should we send your reading?</p>
+      <p style="color:#8a82a0;font-size:14px;line-height:1.6;margin-bottom:22px">Enter your name and email to reveal your archetype. Rose will also email you your full reading and path forward.</p>
+      <label class="form-label">First name</label>
+      <input class="form-input" id="inp-name" type="text" placeholder="e.g. Sarah" value="${S.name}" oninput="S.name=this.value"/>
+      <label class="form-label">Email address</label>
+      <input class="form-input" id="inp-email" type="email" placeholder="you@email.com" value="${S.email}" oninput="S.email=this.value"/>
+      <button class="next-btn" style="width:100%;padding:15px;font-size:15px" onclick="submitContact()">Reveal My Archetype &#10022;</button>
+      <p class="privacy-note">Your information is private and never shared or sold.</p>
+    </div>
+    <div style="text-align:center;margin-top:14px">
+      <button class="ghost-btn" onclick="skipContact()">Skip &#8212; just show me my result</button>
+    </div></div>`;
   } else if(S.screen==='submitting'){
-    app.innerHTML=`<div class="screen" style="text-align:center;padding:80px 0">
-      <div class="spinner"></div>
-      <p style="color:#8a82a0;font-size:15px">Reading the cards...</p>
-    </div>`;
+    app.innerHTML=`<div class="screen" style="text-align:center;padding:80px 0"><div class="spinner"></div><p style="color:#8a82a0;font-size:15px">Reading the cards...</p></div>`;
   } else if(S.screen==='result'){
     const r=S.result;
+    const isReferral=r.referral;
     const beliefs=r.limitingBeliefs.map(b=>`<div class="belief-chip${S.showBeliefs?' show':''}">${b}</div>`).join('');
+    const ctaSection = isReferral ? `
+      <div class="referral-card">
+        <p class="eyebrow">A Note From Rose</p>
+        <p class="referral-title">Your archetype points to specialized work</p>
+        <p class="referral-body">The <strong style="color:#90b8e0">${r.name}</strong> energy you're working through is real and important — and it's best served by a specialist whose entire practice is built around exactly this pattern.<br><br>My Moon to Sun program focuses on overthinkers and identity-level blocks. For <strong style="color:#90b8e0">${r.name}</strong> energy, I'd love to connect you with a colleague whose work is designed specifically for your journey.</p>
+        <a href="mailto:${MY_EMAIL}?subject=Referral Request - ${r.name} Archetype&body=Hi Rose, I completed the Major Arcana quiz and received ${r.name}. I'd love a referral recommendation." target="_blank" class="cta-btn cta-btn-blue">&#10022; Request a Referral from Rose</a>
+        <p class="cta-note">Email Rose at <a href="mailto:${MY_EMAIL}" style="color:#90b8e0">${MY_EMAIL}</a> &#8212; she'll personally match you with the right practitioner.</p>
+      </div>` : `
+      <div class="cta-card">
+        <div class="spots-badge">&#9679; Only 10 spots available</div>
+        <p class="cta-title">Ready to move from ${r.name} into your Sun?</p>
+        <p class="cta-body">The <strong style="color:#e8e0d0">Moon &#8594; Sun 4-Week Pilot Program</strong> uses NLP tools to rewire the exact beliefs your archetype revealed today.</p>
+        <div class="session-box">
+          <p class="session-box-title">&#10022; July Pilot Cohort &#8212; Live Sessions (EST)</p>
+          <div class="session-row"><span class="session-dot">&#9679;</span>Monday July 6 &middot; 7:00 PM &#8212; Archetype Deep Dive + Root Belief Work</div>
+          <div class="session-row"><span class="session-dot">&#9679;</span>Saturday July 11 &middot; 12:00 PM &#8212; NLP Reimprinting + Parts Integration</div>
+          <div class="session-row"><span class="session-dot">&#9679;</span>Saturday July 18 &middot; 12:00 PM &#8212; Identity Shift + Action Anchoring</div>
+          <div class="session-row"><span class="session-dot">&#9679;</span>Saturday July 25 &middot; 12:00 PM &#8212; Sun Integration + Moving Forward</div>
+        </div>
+        <div class="feature-pills">
+          <span class="feature-pill">Belief reimprinting</span>
+          <span class="feature-pill">Parts integration</span>
+          <span class="feature-pill">Identity-level NLP</span>
+          <span class="feature-pill">Live group coaching</span>
+        </div>
+        <div class="price-box">
+          <p class="price-box-title">&#10022; Two Ways to Join</p>
+          <div class="price-row">
+            <div class="price-row-left">
+              <p class="price-label">Standard Pilot Price</p>
+              <p class="price-desc">Pay now to reserve your spot</p>
+            </div>
+            <p class="price-amount">$143</p>
+          </div>
+          <div class="price-row price-row-discount">
+            <div class="price-row-left">
+              <p class="price-label">Founding Member Price <span class="save-tag">Save $46</span></p>
+              <p class="price-desc">Comment on my latest TikTok + DM me your archetype (<strong style="color:#f0d080">${r.name}</strong>) + agree to pre/post testimonial</p>
+            </div>
+            <p class="price-amount price-amount-discount">$97</p>
+          </div>
+        </div>
+        <a href="${PAYPAL}" target="_blank" class="cta-btn">&#10022; Reserve My Spot &#8212; Pay $143 Now</a>
+        <a href="${TIKTOK}" target="_blank" class="cta-btn cta-btn-gold">&#10022; Get Founding Member Price &#8212; $97</a>
+        <p class="cta-note">After paying, email <a href="mailto:${MY_EMAIL}" style="color:#c47a85">${MY_EMAIL}</a> with your name to confirm.<br>Registration closes July 5 at 7pm EST</p>
+      </div>`;
+
     app.innerHTML=`<div class="screen">
       <div style="text-align:center;margin-bottom:28px">
         <p class="eyebrow">Your Archetype Reading</p>
         <div style="font-size:54px;margin-bottom:10px">${r.symbol}</div>
-        <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(28px,6vw,44px);font-weight:600;color:${r.color};margin-bottom:8px">${r.name}</h2>
-        <p style="font-family:'Cormorant Garamond',serif;font-size:19px;font-style:italic;color:#8a82a0">${r.headline}</p>
+        <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(26px,6vw,42px);font-weight:600;color:${r.color};margin-bottom:8px">${r.name}</h2>
+        <p style="font-family:'Cormorant Garamond',serif;font-size:18px;font-style:italic;color:#8a82a0">${r.headline}</p>
       </div>
       <div class="card" style="margin-bottom:14px">
         <p class="section-label" style="color:${r.color}">The Pattern You're In</p>
@@ -370,84 +292,96 @@ function render(){
         ${beliefs}
       </div>
       <div class="sun-card">
-        <p class="sun-label">Your Path &#8594; The Sun</p>
+        <p class="sun-label">Your Path &#8594; Balance &amp; Abundance</p>
         <p class="body-text">${r.movingForward}</p>
         <div class="sun-inner">
-          <p class="sun-inner-label">&#9728; Sun Energy You're Moving Into</p>
+          <p class="sun-inner-label">&#9728; Your Abundant Energy</p>
           <p class="sun-energy">${r.sunEnergy}</p>
         </div>
+        <div class="balanced-box">
+          <p class="balanced-label">&#10022; Your Balanced Expression</p>
+          <p class="balanced-text">${r.balancedState}</p>
+        </div>
       </div>
-      <div class="cta-card">
-        <div class="spots-badge">&#9679; Only 10 spots available</div>
-        <p class="cta-title">Ready to move from ${r.name} into your Sun?</p>
-        <p class="cta-body">The <strong style="color:#e8e0d0">Moon &#8594; Sun 4-Week Pilot Program</strong> is built to dissolve the exact belief your archetype just revealed &#8212; so the pattern that's kept you stuck stops running the show.</p>
-        <div class="session-box">
-          <p class="session-box-title">&#10022; 4-Week Pilot Cohort &#8212; Saturdays at 11am (NY, USA)</p>
-          <div class="session-row"><span class="session-dot">&#9679;</span> Sat, July 11 &#8212; Session 1: Archetype Deep Dive + Root Belief Work</div>
-          <div class="session-row"><span class="session-dot">&#9679;</span> Sat, July 18 &#8212; Session 2: Reimprinting</div>
-          <div class="session-row"><span class="session-dot">&#9679;</span> Sat, July 25 &#8212; Session 3: Action Anchoring</div>
-          <div class="session-row"><span class="session-dot">&#9679;</span> Sat, August 1 &#8212; Session 4: Sun Integration + Moving Forward</div>
-        </div>
-        <div class="feature-pills">
-          <span class="feature-pill">Root-level clarity</span>
-          <span class="feature-pill">Beliefs that actually shift</span>
-          <span class="feature-pill">Action that sticks</span>
-          <span class="feature-pill">Live group coaching</span>
-        </div>
-        <div class="price-box">
-          <p class="price-box-title">&#10022; Two Ways to Join</p>
-          <div class="price-row">
-            <div class="price-row-left">
-              <p class="price-label">Standard Pilot Price</p>
-              <p class="price-desc">Pay now to reserve your spot directly</p>
-            </div>
-            <p class="price-amount">$143</p>
-          </div>
-          <div class="price-row price-row-discount">
-            <div class="price-row-left">
-              <p class="price-label">Founding Member Price <span class="save-tag">Save $46</span></p>
-              <p class="price-desc">Comment on my latest TikTok + DM me your archetype (<strong style="color:#f0d080">${r.name}</strong>) + agree to pre/post testimonial</p>
-            </div>
-            <p class="price-amount price-amount-discount">$97</p>
-          </div>
-        </div>
-        <a href="${PAYPAL}" target="_blank" class="cta-btn">&#10022; Reserve My Spot &#8212; Pay $143 Now</a>
-        <a href="${TIKTOK}" target="_blank" class="cta-btn cta-btn-gold">&#10022; Get Founding Member Price &#8212; $97</a>
-        <p class="cta-note">After paying, email <a href="mailto:${MY_EMAIL}" style="color:#c47a85">${MY_EMAIL}</a> with your name to confirm your spot.<br>Registration closes Friday, July 10 at 11:59pm (NY, USA) &#8212; doors open Saturday at 11am.</p>
-      </div>
+      ${ctaSection}
       <div class="retake-row"><button class="ghost-btn" onclick="startQuiz()">&#8617; Retake the Quiz</button></div>
     </div>`;
   }
 }
 
-// ── Actions ──
 function startQuiz(){S={screen:'quiz',current:0,answers:Array(QUESTIONS.length).fill(null),selected:null,showBeliefs:false,name:'',email:'',result:null};render();}
 function selectOpt(i){S.selected=i;render();}
-function goNext(){if(S.selected===null)return;S.answers[S.current]=QUESTIONS[S.current].options[S.selected];if(S.current<QUESTIONS.length-1){S.current++;S.selected=null;render();}else{S.screen='contact';render();}}
-function goBack(){if(S.current===0){S.screen='intro';render();return;}S.current--;const prev=S.answers[S.current];S.selected=prev?QUESTIONS[S.current].options.indexOf(prev):null;render();}
-
+function goNext(){
+  if(S.selected===null)return;
+  S.answers[S.current]=QUESTIONS[S.current].options[S.selected];
+  if(S.current<QUESTIONS.length-1){S.current++;S.selected=null;render();}
+  else{S.screen='contact';render();}
+}
+function goBack(){
+  if(S.current===0){S.screen='intro';render();return;}
+  S.current--;
+  const prev=S.answers[S.current];
+  S.selected=prev?QUESTIONS[S.current].options.indexOf(prev):null;
+  render();
+}
 async function submitContact(){
   const name=document.getElementById('inp-name').value.trim();
   const email=document.getElementById('inp-email').value.trim();
   if(!email){alert('Please enter your email to continue.');return;}
-  S.name=name; S.email=email;
-  S.screen='submitting'; render();
+  S.name=name;S.email=email;S.screen='submitting';render();
   S.result=score(S.answers);
   const r=S.result;
   const summary=S.answers.map((a,i)=>a?'Q'+(i+1)+': '+a.text:'').filter(Boolean).join(' | ');
-  // Send email — this is our primary data capture
-  await sendResult(name,email,r.name,r.movingForward,r.sunEnergy,r.limitingBeliefs.join(' | '),summary);
-  S.screen='result'; render();
+  await sendResult(name,email,r.name,r.movingForward,r.sunEnergy,r.limitingBeliefs.join(' | '),r.balancedState,summary);
+  S.screen='result';render();
 }
-
-async function skipContact(){
-  S.screen='submitting'; render();
-  S.result=score(S.answers);
-  S.screen='result'; render();
-}
-
+async function skipContact(){S.screen='submitting';render();S.result=score(S.answers);S.screen='result';render();}
 function toggleBeliefs(){S.showBeliefs=!S.showBeliefs;render();}
 render();
 </script>
 </body>
-</html>
+</html>'''
+
+with open('/mnt/user-data/outputs/index.html', 'w') as f:
+    f.write(full_file)
+
+with open('/mnt/user-data/outputs/index.html', 'r') as f:
+    c = f.read()
+
+checks = [
+    ('All 22 archetypes', c.count('referral:') == 22),
+    ('10 questions', c.count('{id:') == 10),
+    ('8 options per question', c.count('arcanas:["') >= 80),
+    ('Correct EmailJS key', 'UzY23e44cIij2M22R' in c),
+    ('Referral routing', 'referral-card' in c),
+    ('Balanced state shown', 'balancedState' in c),
+    ('Email function', 'sendResult' in c),
+    ('Toast notifications', 'showToast' in c),
+    ('PayPal button', 'paypal.me/1021rota/143' in c),
+    ('TikTok button', 'tiktok.com/@1021rota' in c),
+    ('July dates', 'July 11' in c),
+    ('Referral email link', 'Referral Request' in c),
+]
+print("Final verification:")
+for label,ok in checks:
+    print(f"  {'OK' if ok else 'MISSING'} {label}")
+print(f"\nFile: {len(c)} chars, {c.count(chr(10))} lines")
+PYEOF
+Output
+
+Final verification:
+  OK All 22 archetypes
+  OK 10 questions
+  OK 8 options per question
+  OK Correct EmailJS key
+  OK Referral routing
+  OK Balanced state shown
+  OK Email function
+  OK Toast notifications
+  OK PayPal button
+  OK TikTok button
+  OK July dates
+  OK Referral email link
+
+File: 55757 chars, 593 lines
+Done
